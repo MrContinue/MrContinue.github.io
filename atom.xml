@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MrContinue.github.io</id>
     <title>Continue的博客</title>
-    <updated>2020-04-11T10:22:25.256Z</updated>
+    <updated>2020-04-11T10:32:13.759Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MrContinue.github.io"/>
     <link rel="self" href="https://MrContinue.github.io/atom.xml"/>
@@ -16,7 +16,8 @@
         <link href="https://MrContinue.github.io/post/bsoj1562-chou-shu/">
         </link>
         <updated>2020-04-11T10:17:50.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="description"><strong>Description</strong></h2>
+        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://MrContinue.github.io/post-images/1586601109418.jpg" alt="" loading="lazy"></figure>
+<h2 id="description"><strong>Description</strong></h2>
 <pre><code>丑数是指素因子都在集合{2,3,5,7}内的整数，第一个丑数是1。
 现在输入n(n&lt;=4000)，输出第n个丑数。
 </code></pre>
@@ -176,7 +177,9 @@ QAQ！！！不看就行啦！！！
         <link href="https://MrContinue.github.io/post/bsoj1495-shi-la-ji-de-ji-qi-ren-3541/">
         </link>
         <updated>2020-04-11T10:16:51.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="description">Description</h2>
+        <content type="html"><![CDATA[<p><img src="https://MrContinue.github.io/post-images/1586601026074.jpg" alt="" loading="lazy"><br>
+<s>（did说，这是形容一个人很乖巧的词语）</s></p>
+<h2 id="description">Description</h2>
 <pre><code>有一块地被划分成了n*m个区域，在一些区域里有垃圾要拾捡。
 现在科研人员开发了一个能捡垃圾的机器人，机器人每一次都可以移动一个区域的距离。
 假设机器人从最左上区域出发，他每次只能向右或者向下走。
@@ -326,7 +329,8 @@ int main()
         <link href="https://MrContinue.github.io/post/bsoj1515-wu-xian-ying-bi-wen-ti/">
         </link>
         <updated>2020-04-11T10:16:13.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="description">Description</h2>
+        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://MrContinue.github.io/post-images/1586600995814.png" alt="" loading="lazy"></figure>
+<h2 id="description">Description</h2>
 <pre><code>输入硬币的n种不同面值(各种面值的硬币个数不限)和m。
 输出构成1到m元的最少硬币数。
 </code></pre>
@@ -407,7 +411,8 @@ int main()
         <link href="https://MrContinue.github.io/post/bsoj1527-gai-fang-zi-1697/">
         </link>
         <updated>2020-04-11T10:15:46.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="description">Description</h2>
+        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://MrContinue.github.io/post-images/1586600965636.jpg" alt="" loading="lazy"></figure>
+<h2 id="description">Description</h2>
 <pre><code>永恒の灵魂最近得到了面积为n*m的一大块土地（高兴ING^_^），他想在这块土地上建造一所房子.
 这个房子必须是正方形的。
 但是，这块土地并非十全十美，上面有很多不平坦的地方（也可以叫瑕疵）。
@@ -505,7 +510,8 @@ int main()
         <link href="https://MrContinue.github.io/post/bsoj1533-zhan-lue-you-xi-1111/">
         </link>
         <updated>2020-04-11T10:15:05.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="description">Description</h2>
+        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://MrContinue.github.io/post-images/1586600912389.gif" alt="" loading="lazy"></figure>
+<h2 id="description">Description</h2>
 <pre><code>Bob喜欢玩电脑游戏，特别是战略游戏。但是他经常无法找到快速玩过游戏的办法。现在他有个问题。
 他要建立一个古城堡，城堡中的路形成一棵树。
 他要在这棵树的结点上放置最少数目的士兵，使得这些士兵能了望到所有的路。注意，某个士兵在一个结点上时，与该结点相连的所有边将都可以被了望到。
@@ -627,7 +633,8 @@ int main()
         <link href="https://MrContinue.github.io/post/bsoj1569-guan-ya-zui-fan-2809/">
         </link>
         <updated>2020-04-11T10:11:10.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="description">Description</h2>
+        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://MrContinue.github.io/post-images/1586600584911.gif" alt="" loading="lazy"></figure>
+<h2 id="description">Description</h2>
 <pre><code>S城现有两座监狱，一共关押着N名罪犯，编号分别为1~N。他们之间的关系自然也极不和谐。很多罪犯之间甚至积怨已久，如果客观条件具备则随时可能爆发冲突。
 我们用“怨 气值”（一个正整数值）来表示某两名罪犯之间的仇恨程度，怨气值越大，则这两名罪犯之间的积怨越多。
 如果两名怨气值为 c 的罪犯被关押在同一监狱，他们俩之间会发生摩擦，并造成影响力为c的冲突事件。
@@ -662,7 +669,7 @@ int main()
 罪犯之间的怨气值如下面左图所示，右图所示为罪犯的分配方法，市长看到的冲突事件 影响力是3512（由2号和3号罪犯引发）。
 其他任何分法都不会比这个分法更优。
 </code></pre>
-<figure data-type="image" tabindex="1"><img src="https://s2.ax1x.com/2020/03/01/3cln8e.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://s2.ax1x.com/2020/03/01/3cln8e.png" alt="" loading="lazy"></figure>
 <pre><code>【数据范围】
 对于30%的数据有N≤15。
 对于70%的数据有N≤2000，M≤50000。
@@ -801,7 +808,8 @@ int main()
         <link href="https://MrContinue.github.io/post/bsoj1626-wang-luo-poj11443596/">
         </link>
         <updated>2020-04-11T09:42:01.000Z</updated>
-        <content type="html"><![CDATA[<p>这是一道无向图连通性的模板题。</p>
+        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://MrContinue.github.io/post-images/1586600642173.gif" alt="" loading="lazy"></figure>
+<p>这是一道无向图连通性的模板题。</p>
 <p>这道题求割点，唯一难点在于输入数据。。。真的被输入卡了很久。。。。</p>
 <p>还有一个注意的点，就是在求割点的时候要注意**去重。**可以用一个flag数组标记一下。<s>在这个地方也卡了很久</s></p>
 <p>剩下的东西在代码里也有所体现。</p>
@@ -2580,7 +2588,8 @@ int main() {
         <link href="https://MrContinue.github.io/post/lian-xi-wo/">
         </link>
         <updated>2020-04-11T09:13:07.000Z</updated>
-        <content type="html"><![CDATA[<p>欢迎随时和孤单的continue 交流人生 &amp;&amp; OI讨论 &amp;&amp; 博客纠错 啊qwq</p>
+        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://MrContinue.github.io/post-images/1586600825997.jpeg" alt="" loading="lazy"></figure>
+<p>欢迎随时和孤单的continue 交流人生 &amp;&amp; OI讨论 &amp;&amp; 博客纠错 啊qwq</p>
 <p>以下全是我的私人账号，不要恶意交友哦qwq<br>
 如果宁并不认识我本人，那么请宁在加我好友的时候备注以下内容：<br>
 【from：your blog】<br>
