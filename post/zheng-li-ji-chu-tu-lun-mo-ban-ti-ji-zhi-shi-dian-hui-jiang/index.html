@@ -1,0 +1,1269 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>【整理】基础图论模板题及知识点汇讲 | Continue的博客</title>
+<link rel="shortcut icon" href="https://MrContinue.github.io/favicon.ico?v=1586600307676">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://MrContinue.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="【整理】基础图论模板题及知识点汇讲 | Continue的博客 - Atom Feed" href="https://MrContinue.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="特别特别感谢：
+lmpp大佬牺牲自己宝贵时间，为我没有脾气的耐心讲解。
+lmpp大佬的博客：墙裂建议进去康一康！
+hcq大佬在本博客发表的第一时间就提出了许多宝贵建议！！
+还有gmq、gbf同学，感谢你们的鼓励与支持！！
+did教给我知识真..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://MrContinue.github.io">
+  <img class="avatar" src="https://MrContinue.github.io/images/avatar.png?v=1586600307676" alt="">
+  </a>
+  <h1 class="site-title">
+    Continue的博客
+  </h1>
+  <p class="site-description">
+    请你照亮我前进的路
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="https://MrContinue.github.io/post/about-me" class="menu">
+          About Me
+        </a>
+      
+    
+      
+        <a href="https://MrContinue.github.io/post/wo-de-hao-peng-you-meng" class="menu">
+          我的好朋友萌！（友链）
+        </a>
+      
+    
+      
+        <a href="https://MrContinue.github.io/post/lian-xi-wo" class="menu">
+          联系方式
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/MrContinue" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+        <a href="https://www.zhihu.com/people/gradually-disappear" target="_blank">
+          <i class="ri-zhihu-line"></i>
+        </a>
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              【整理】基础图论模板题及知识点汇讲
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-04-11
+              </span>
+              <span>
+                37 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="特别特别感谢">特别特别感谢：</h2>
+<h3 id="lmpp"><a href="https://www.luogu.com.cn/user/160839">lmpp</a>大佬<strong>牺牲自己宝贵时间，为我没有脾气的耐心讲解。</strong></h3>
+<h3 id="lmpp大佬的博客"><a href="https://www.luogu.com.cn/blog/160839/">lmpp大佬的博客</a>：墙裂建议进去康一康！</h3>
+<h3 id="hcq大佬在本博客发表的第一时间就提出了许多宝贵建议">hcq大佬在本博客发表的第一时间就提出了许多宝贵建议！！</h3>
+<h4 id="还有gmq-gbf同学感谢你们的鼓励与支持">还有gmq、gbf同学，感谢你们的鼓励与支持！！</h4>
+<h4 id="did教给我知识真是太强了">did教给我知识真是太强了！！</h4>
+<p>没有他们就没有这篇博客，我也会比现在蒻上<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mi>n</mi><mi>f</mi></mrow><annotation encoding="application/x-tex">inf</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span></span></span></span>倍。</p>
+<hr>
+<h2 id="提示">提示：</h2>
+<p>本博客公开， <strong>但“例题部分”仅记录的是本人认为较有意义添加的题或者是本人的知识盲区。</strong> 我会以<strong>知识点为经，算法为纬</strong>，在知识点开头加入模板题并附有代码，有的时候会写一点小提示，即<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span>。</p>
+<p>在我自己掌握特别不好的题目/知识点旁会加以<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="Red"><menclose mathbackground="Yellow"><mtext>！</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\color{Red}\colorbox{Yellow}{！}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2833299999999999em;vertical-align:-0.3em;"></span><span class="mord" style="color:Red;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9833299999999998em;"><span style="top:-2.98333em;"><span class="pstrut" style="height:3.28333em;"></span><span class="stretchy colorbox" style="color:Red;height:1.2833299999999999em;background-color:Yellow;"></span></span><span style="top:-3.28333em;"><span class="pstrut" style="height:3.28333em;"></span><span class="mord boxpad" style="color:Red;"><span class="mord cjk_fallback" style="color:Red;">！</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3em;"><span></span></span></span></span></span></span></span></span> 的标记。</p>
+<p><strong>所有题号以BSOJ为准。</strong></p>
+<p>有什么错误纰漏的直接QQ+洛谷私信+讨论区留言，我真的超级需要您的反馈的qwq。</p>
+<p>希望能您能从这份清单中找到您的一些知识漏洞并把他们补起来！</p>
+<hr>
+<h2 id="更新信息">更新信息</h2>
+<p>2020.3.29 <strong>1.0版本</strong>，开始新的篇章。知识点记录至拓扑排序模板题。</p>
+<p>2020.3.30 &amp;&amp; 2020.3.31 <strong>2.0版本</strong>，爆肝完所有知识点。</p>
+<hr>
+<h2 id="拓扑排序">拓扑排序：</h2>
+<p><a href="https://oj.bashu.com.cn/pub/problempage.php?problem_id=1462">1462 拓扑排序</a></p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips1:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips1:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">1</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
+<p><strong>拓扑排序的基本知识：</strong></p>
+<ul>
+<li>
+<p>在图论中，<strong>拓扑排序</strong>是一个<strong>有向无环图</strong>（DAG）的<strong>所有顶点的线性序列</strong>，该序列必须满足下面两个条件：</p>
+<ol>
+<li><strong>每个顶点出现且只出现一次。</strong></li>
+<li><strong>若存在一条从顶点A到顶点B的路径，那么在序列中顶点A出现在顶点B的前面。</strong></li>
+</ol>
+</li>
+<li>
+<p><strong>有向无环图（DAG）才有拓扑排序，非DAG图没有拓扑排序一说。 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mrow></mrow><mrow><mo>[</mo><mn>1</mn><mo>]</mo></mrow></msup></mrow><annotation encoding="application/x-tex">^{[1]}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">[</span><span class="mord mtight">1</span><span class="mclose mtight">]</span></span></span></span></span></span></span></span></span></span></span></span></strong></p>
+</li>
+<li>
+<p>拓扑排序的操作方法：</p>
+<ol>
+<li>从DAG图中选择一个 <strong>没有前驱（即入度为零）</strong> 的顶点并输出。</li>
+<li>从图中删除<strong>该顶点和所有以它为起点的有向边。</strong></li>
+<li>重复1和2直到当前的DAG图为空或当前图不存在无前驱的顶点为止。<strong>后一种情况说明有向图中必然存在环。</strong></li>
+</ol>
+</li>
+<li>
+<p>通常，一个DAG图可以有<strong>一个或多个</strong>拓扑序列。</p>
+</li>
+</ul>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mrow></mrow><mrow><mo>[</mo><mn>1</mn><mo>]</mo></mrow></msup></mrow><annotation encoding="application/x-tex">^{[1]}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">[</span><span class="mord mtight">1</span><span class="mclose mtight">]</span></span></span></span></span></span></span></span></span></span></span></span>：拓扑排序之所以只能针对于DAG图，就是因为它有<strong>每次取出入度为0的顶点</strong>的操作，如果有环，则环中的顶点不存在入度为0的点，无法进行拓扑排序。</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips2:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips2:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">2</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
+<p><strong>关于拓扑排序的应用</strong></p>
+<p>拓扑排序一般很少有单独针对该知识点的题，但是在<strong>关键路径</strong>和平常的其他例题的辅助操作中却发挥着重要作用。所以掌握好拓扑排序是很重要的事情。</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips3:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips3:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">3</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
+<p><strong>本代码按字典序输出的部分：</strong></p>
+<pre><code>int j=1; //从第一个点开始查找
+while(j&lt;=n&amp;&amp;bein[j])
+	j++; //统计入度为零的节点
+//由于-1的bool值也视作真，所以可以标记为-1
+if(j&gt;n) return 0; //如果统计的节点超出了范围n，说明这个图有环
+sum[++top]=j; //拓扑序列答案数组统计新答案
+</code></pre>
+<pre><code>//本代码由邻接矩阵实现，按字典序输出，复杂度O(n^2)
+
+#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+
+#define maxn 205
+using namespace std;
+
+int bein[maxn]; //bein[i]表示节点i的入度
+int a[maxn][maxn]; //邻接矩阵存图
+int sum[maxn],top; //拓扑序列答案数组
+int n,m;
+
+int TS()
+{
+	for(int i=1;i&lt;=n;i++)
+	{
+		int j=1; //从第一个点开始查找
+		while(j&lt;=n&amp;&amp;bein[j])
+			j++; //统计入度为零的节点
+        //由于-1的bool值也视作真，所以可以标记为-1
+		if(j&gt;n) return 0; //如果统计的节点超出了范围n，说明这个图有环
+		sum[++top]=j; //拓扑序列答案数组统计新答案
+		bein[j]=-1; //标记此点已经遍历
+		for(int k=1;k&lt;=n;k++)
+			if(a[j][k]) //如果j和k之间有边相连
+				bein[k]--; //和j相关联的节点删除与j相连的边，即入度--
+	}
+	return 1; //如果遍历过程中没有返回过假值，则有解，返回真值
+}
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;m;
+	for(int i=1;i&lt;=m;i++)
+	{
+		int x,y;
+		cin&gt;&gt;x&gt;&gt;y;
+		a[x][y]=1; //邻接矩阵储存单向边
+		bein[y]++; //输入是从x到y的连线，所以是y的入度增加
+	}
+	if(TS()) //如果有解
+		for(int i=1;i&lt;=n;i++)
+			cout&lt;&lt;sum[i]&lt;&lt;&quot; &quot;; //则输出节点的答案数组
+	else
+		cout&lt;&lt;&quot;no solution&quot;&lt;&lt;endl; //无解输出&quot;no solution&quot;
+	return 0;
+}
+</code></pre>
+<hr>
+<h2 id="最小生成树">最小生成树</h2>
+<ul>
+<li>
+<p><strong>最小生成树</strong>：在一张带权的无向连通图中，<strong>各边权和为最小的一颗生成树</strong>即为最小生成树。</p>
+<p>简单讲：找出<strong>连接所有点</strong>的<strong>最低成本路线</strong>。</p>
+</li>
+<li>
+<p><strong>最小边原则<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mrow></mrow><mrow><mo>[</mo><mn>2</mn><mo>]</mo></mrow></msup></mrow><annotation encoding="application/x-tex">^{[2]}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">[</span><span class="mord mtight">2</span><span class="mclose mtight">]</span></span></span></span></span></span></span></span></span></span></span></span></strong>：图中权值最小的边（如果唯一的话）一定在MST上。</p>
+</li>
+<li>
+<p><strong>唯一性<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mrow></mrow><mrow><mo>[</mo><mn>3</mn><mo>]</mo></mrow></msup></mrow><annotation encoding="application/x-tex">^{[3]}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">[</span><span class="mord mtight">3</span><span class="mclose mtight">]</span></span></span></span></span></span></span></span></span></span></span></span></strong>：一颗最小生成树上，如果各边的权都不相同，则最小生成树是唯一的。</p>
+</li>
+</ul>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mrow></mrow><mrow><mo>[</mo><mn>2</mn><mo>]</mo></mrow></msup></mrow><annotation encoding="application/x-tex">^{[2]}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">[</span><span class="mord mtight">2</span><span class="mclose mtight">]</span></span></span></span></span></span></span></span></span></span></span></span>、<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mrow></mrow><mrow><mo>[</mo><mn>3</mn><mo>]</mo></mrow></msup></mrow><annotation encoding="application/x-tex">^{[3]}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">[</span><span class="mord mtight">3</span><span class="mclose mtight">]</span></span></span></span></span></span></span></span></span></span></span></span>：这些补充的知识主要用于Prim算法的使用。</p>
+<h3 id="kruskal算法">Kruskal算法</h3>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips1:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips1:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">1</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
+<p><strong>Krudkal算法的基本知识：</strong></p>
+<ul>
+<li>
+<p>Kruskal算法是一种贪心算法，它是<strong>将边按权值排序</strong>，每次从剩下的边集中<strong>选择权值最小且两个端点不在同一集合的边</strong>加入生成树中，反复操作，直到加入了（n-1）条边。<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mrow></mrow><mrow><mo>[</mo><mn>4</mn><mo>]</mo></mrow></msup></mrow><annotation encoding="application/x-tex">^{[4]}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">[</span><span class="mord mtight">4</span><span class="mclose mtight">]</span></span></span></span></span></span></span></span></span></span></span></span></p>
+</li>
+<li>
+<p>Kruskal的操作方法：</p>
+<ol>
+<li>按图中的边按权值从小到大快排。</li>
+<li>按照权值从小到大依次选边，若当前选取的边加入后使生成树形成环，则舍弃当前边；否则标记当前边并计数。</li>
+<li>重复2的操作，直到生成树中包含（n-1）条边为止；否则当遍历完所有的边后，都不能选取（n-1）条边，表示最小生成树不存在。</li>
+</ol>
+</li>
+<li>
+<p>算法的关键在于<strong>如何判定新加入的边会不会使图产生环</strong>，在这里使用<strong>并查集</strong>。如果新加入的边两个端点在并查集的同一个集合中，说明存在环，需要舍弃这条边；否则保留当前边，并合并涉及的两个集合。</p>
+</li>
+</ul>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mrow></mrow><mrow><mo>[</mo><mn>4</mn><mo>]</mo></mrow></msup></mrow><annotation encoding="application/x-tex">^{[4]}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">[</span><span class="mord mtight">4</span><span class="mclose mtight">]</span></span></span></span></span></span></span></span></span></span></span></span>：简单地说，就是将从小到大的边依次选入ans树中，若操作的两个两条边不属于同一集合（即不构成环），则加入ans树并累加值，反之则不作操作。</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips2:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips2:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">2</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
+<p><strong>并查集的基本操作：</strong></p>
+<ol>
+<li>找根节点：</li>
+</ol>
+<pre><code>int GetFather(int x)
+{
+	if(prt[x]==x) return x;
+    return prt[x]=GetFather(prt[x]);
+}
+</code></pre>
+<ol start="2">
+<li>合并操作（一般可以直接写在主函数里）：</li>
+</ol>
+<pre><code>void Add(int x,int y)
+{
+	int f1=GetFather(x);
+    int f2=GetFather(y);
+    if(f1!=f2) prt[f1]=f2;
+}
+</code></pre>
+<p><a href="https://oj.bashu.com.cn/pub/problempage.php?problem_id=1449">1449 最小生成树</a></p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+
+#define maxn 40005
+using namespace std;
+
+int n,m;
+int prt[maxn]; //prt[i]表示节点i的根节点
+int ans=0; //最小生成树的总权值和
+bool flag; //标记是否有解
+
+struct Edge
+{
+	int x,y,v;
+}a[maxn]; 
+//x[i]代表a[i]这条边的起点
+//y[i]代表a[i]这条边的终点
+//v[i]代表a[i]这条边的权值
+
+bool cmp(Edge x,Edge y) //结构体数组排序函数
+{
+	return x.v&lt;y.v;
+}
+
+int GetFather(int x) //并查集查找根节点，这里使用了状态压缩
+{
+	if(prt[x]==x) return x;
+	prt[x]=GetFather(prt[x]); //压缩
+	return prt[x];
+}
+
+void K()
+{
+	int f1,f2;
+	int k=0;
+	for(int i=1;i&lt;=m;i++)
+	{
+		f1=GetFather(a[i].x);
+		f2=GetFather(a[i].y); //分别找出x，y所属的集合，即根节点
+		if(f1!=f2) //如果不属于同一集合，即不会形成环，则合并两集合
+		{
+			ans+=a[i].v; //累加最小生成树的权和总值值
+			prt[f1]=f2; //两集合合并
+			k++; //总结点数累加
+			if(k==n-1) //如果超过（n-1）条边，则停止遍历
+				break;
+		}
+	}
+	if(k&lt;n-1) //如果当遍历完所有的边后 都不能选取（n-1）条边 则表示最小生成树不存在
+	{
+		cout&lt;&lt;&quot;Impossible&quot;&lt;&lt;endl;
+		flag=1; //标记没有最小生成树
+		return ;
+	}
+}
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;m;
+	for(int i=1;i&lt;=m;i++)
+		cin&gt;&gt;a[i].x&gt;&gt;a[i].y&gt;&gt;a[i].v;
+	for(int i=1;i&lt;=n;i++)
+		prt[i]=i; //并查集初始化
+	sort(a+1,a+m+1,cmp); //按边权从小到大排好，以便贪心操作
+	K();
+	if(!flag) //如果有最小生成树，则输出最小权值
+		cout&lt;&lt;ans&lt;&lt;endl; 
+	return 0;
+}
+</code></pre>
+<hr>
+<h3 id="prim算法">Prim算法</h3>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips1:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips1:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">1</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
+<p><strong>Prim算法的操作方法：</strong></p>
+<ul>
+<li>
+<p>将1号节点置入集合S中。</p>
+</li>
+<li>
+<p>找到所有连接S中的节点和非S中的节点的边中权值最小的那一条，并标记这条边，同时将连接的非S中的节点加入S集合。</p>
+</li>
+<li>
+<p>重复2步骤，知道左右节点在S中。</p>
+</li>
+</ul>
+<p>（sorry，这里盗个did的图~）</p>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-fR17UXKH-1585646967612)(https://s1.ax1x.com/2020/03/30/GusFwd.png)]</p>
+<p>简单来说，就是S集合中的元素从一个根节点1开始，以<strong>一个集合整体出动</strong>的方式来扩展其他的点，以获取最小生成树。</p>
+<p><a href="https://oj.bashu.com.cn/pub/problempage.php?problem_id=1449">1449 最小生成树</a></p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+
+#define maxn 1005
+using namespace std;
+
+int a[maxn][maxn]; //元素数组
+int d[maxn]; //d[i]表示不是生成树中点i到当前生成树中点的最小值
+bool vis[maxn]; //vis[i]标记顶点i是否加入最小生成树中
+int ans[maxn]; //答案数组
+
+int n,m;
+int sum;
+
+int P(int x)
+{
+	memset(vis,0,sizeof(vis));
+	for(int i=1;i&lt;=n;i++)
+		d[i]=0x3f3f3f; //初始化
+	d[x]=0; //第一个节点（即根节点）距离根节点（即自己）的距离为0
+	int k;
+	for(int i=1;i&lt;=n;i++)
+	{
+		int minn=0x3f3f3f; //统计最小边权
+		for(int j=1;j&lt;=n;j++)
+			if(!vis[j]&amp;&amp;d[j]&lt;minn) //如果节点j没有访问过且其边权小于当前最小边权
+			{
+				minn=d[j];
+				k=j; //记录该节点			
+			}
+		vis[k]=1; //把该节点加入到集合中，设置状态为已访问
+		sum+=d[k]; //累加总值
+		for(int j=1;j&lt;=n;j++)
+			if(!vis[j])
+				d[j]=min(d[j],a[k][j]); //更新集合到每个点的最短距离
+	}
+}
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;m;
+	for(int i=1;i&lt;=n;i++)
+		for(int j=1;j&lt;=m;j++)
+			a[i][j]=0x3f3f3f; //初始化
+	for(int i=1;i&lt;=m;i++)
+	{
+		int x,y,v;
+		cin&gt;&gt;x&gt;&gt;y&gt;&gt;v;
+		a[x][y]=v;
+		a[y][x]=v; //邻接数组建双边
+	}
+	P(1); //从1开始遍历
+	cout&lt;&lt;sum&lt;&lt;endl;
+	return 0;
+}
+</code></pre>
+<hr>
+<h2 id="最短路径问题">最短路径问题</h2>
+<ul>
+<li>
+<p><strong>最短路径</strong>：在一个有权图中连接给定两个顶点的权值和最小的路径。</p>
+</li>
+<li>
+<p><strong>最短路树和最小生成树可以不一样</strong>。</p>
+</li>
+<li>
+<p>一般有两类最短路问题：</p>
+<ol>
+<li>SSSP（单源最短路）：求<strong>给定起点S到其他所有点</strong>的最短路，常见算法有<strong>Dijkstra算法、SPFA算法</strong>等。</li>
+<li>APSP（多源最短路）：求<strong>任意两对顶点</strong>之间的最短路，常见算法有Floyed算法。</li>
+</ol>
+</li>
+</ul>
+<h3 id="dijkstra算法">Dijkstra算法</h3>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips1:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips1:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">1</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
+<p><strong>三角形性质</strong>：</p>
+<p>设源点S到点x、y的最短路径长度为d[x]、d[y]。x与y之间的距离是g[x][y]，则有下面的“三角形定理”：</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mo>[</mo><mi>x</mi><mo>]</mo><mo>+</mo><mi>g</mi><mo>[</mo><mi>x</mi><mo>]</mo><mo>[</mo><mi>y</mi><mo>]</mo><mo>&gt;</mo><mo>=</mo><mi>d</mi><mo>[</mo><mi>y</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">d[x]+g[x][y]&gt;=d[y]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mopen">[</span><span class="mord mathdefault">x</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">[</span><span class="mord mathdefault">x</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">]</span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips2:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips2:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">2</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
+<p><strong>松弛</strong>：</p>
+<p>若在处理过程中，有两点x、y出现不符合“三角形定理”，则可“松弛一下”：</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mi>f</mi><mo>(</mo><mi>d</mi><mo>[</mo><mi>x</mi><mo>]</mo><mo>+</mo><mi>g</mi><mo>[</mo><mi>x</mi><mo>]</mo><mo>[</mo><mi>y</mi><mo>]</mo><mo>&lt;</mo><mi>d</mi><mo>[</mo><mi>y</mi><mo>]</mo><mo>)</mo><mi>d</mi><mo>[</mo><mi>y</mi><mo>]</mo><mo>=</mo><mi>d</mi><mo>[</mo><mi>x</mi><mo>]</mo><mo>+</mo><mi>g</mi><mo>[</mo><mi>x</mi><mo>]</mo><mo>[</mo><mi>y</mi><mo>]</mo><mo separator="true">;</mo></mrow><annotation encoding="application/x-tex">if(d[x]+g[x][y]&lt;d[y]) d[y]=d[x]+g[x][y];</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">d</span><span class="mopen">[</span><span class="mord mathdefault">x</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">[</span><span class="mord mathdefault">x</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">]</span><span class="mclose">)</span><span class="mord mathdefault">d</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mopen">[</span><span class="mord mathdefault">x</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">[</span><span class="mord mathdefault">x</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">]</span><span class="mpunct">;</span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips3:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips3:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">3</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
+<p><strong>Dijkstra算法的操作方法</strong>：</p>
+<ul>
+<li>
+<p>初始化d[v0]=0，源点到其他点的距离值d[i]=inf。</p>
+</li>
+<li>
+<p>经过n次如下步骤操作，最后得到v0到n个顶点的最短距离：</p>
+<ol>
+<li>选择一个未标记的点k并且d[k]的值是当前最小的。</li>
+<li>标记点k，即vis[k]=1.</li>
+<li>以k为中间点，修改源点v0到其他未标记点j的距离值d[j]。</li>
+</ol>
+</li>
+</ul>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips4:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips4:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">4</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
+<p><strong>个人小议Dijkstra算法与Prim算法的不同</strong>：</p>
+<ul>
+<li>
+<p>目的上，Prim试求最小生成树，Dijkstra试求最短路</p>
+</li>
+<li>
+<p>距离上，Prim是让整个集合看距离，而这个集合是一堆边<br>
+Dijkstra是从原点开始更新距离，然后点连点更新距离；</p>
+</li>
+<li>
+<p>连点上，Prim是一个集合（边）连所有点<br>
+Dijkstra是一个点只能连直接与自己相关联的点，在开始连接新的点的时候，从最小的点开始继续访问</p>
+</li>
+<li>
+<p>Dijkstra之所以选当前最小的点开始继续连点是因为最小的点可以有期望让到其他的点的边权尽量小</p>
+</li>
+<li>
+<p>Prim算法数组里存的是点到集合的距离<br>
+Dijkstra算法数组里存的是所有点到总的原点1的距离</p>
+</li>
+</ul>
+<p><a href="https://oj.bashu.com.cn/pub/problempage.php?problem_id=1428">1428 最短路径问题</a></p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cmath&gt;
+
+#define maxn 1005
+using namespace std;
+
+double a[maxn]; //a[i]表示不是生成树中点i到源点的最小值
+double g[maxn][maxn]; //邻接数组存边
+int prt[maxn]; //记录自己的值是从哪个节点来的，即为相对的父亲节点
+bool vis[maxn]; //标记是否访问过
+int s,t; //起点和终点
+int n,m;
+
+struct Node
+{
+	int x,y;
+}q[maxn]; //储存坐标
+
+double len(Node a,Node b) //通过x、y坐标计算边的长度
+{
+	return sqrt((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y));
+}
+
+void D()
+{
+	for(int i=1;i&lt;=n;i++)
+		a[i]=999999.9; //初始化
+	int k;
+	a[s]=0; //第一个节点（即根节点）距离根节点（即自己）的距离为0
+	prt[s]=0; //第一个节点的父亲定义为0
+	for(int i=1;i&lt;=n;i++)
+	{
+		double minn=999999.9; //找最小边权
+		for(int j=1;j&lt;=n;j++)
+			if(!vis[j]) //如果未访问过
+				if(a[j]&lt;minn) //且此边权小于当前最小边权
+				{
+					minn=a[j]; //则更新最小边权
+					k=j; //记录此节点
+				}
+		vis[k]=1; //访问该节点
+		for(int j=1;j&lt;=n;j++)
+			if(g[k][j]&gt;0&amp;&amp;!vis[j]) //更新与该节点有连接的点的边权值
+				if(a[k]+g[k][j]&lt;a[j]) //松弛操作
+				{
+					a[j]=a[k]+g[k][j];
+					prt[j]=k; //记录更新它的值的节点
+				}
+	}
+}
+
+int main()
+{
+	cin&gt;&gt;n;
+	for(int i=1;i&lt;=n;i++)
+	{
+		int x,y;
+		cin&gt;&gt;x&gt;&gt;y;
+		q[i].x=x;
+		q[i].y=y; //记录坐标
+	}
+	cin&gt;&gt;m;
+	for(int i=1;i&lt;=m;i++)
+	{
+		int x,y;
+		cin&gt;&gt;x&gt;&gt;y;
+		double v=len(q[x],q[y]); //计算边权
+		g[x][y]=v;
+		g[y][x]=v; //邻接矩阵建双边
+	}
+	cin&gt;&gt;s&gt;&gt;t;
+	D();
+	printf(&quot;%.2f&quot;,a[t]); //直接输出节点t距离源点s的距离
+	return 0;
+}
+</code></pre>
+<h3 id="floyed算法">Floyed算法</h3>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips1:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips1:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">1</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
+<p><strong>Floyed算法的基本知识</strong>：</p>
+<ul>
+<li>
+<p>Floyed算法是DP思想。</p>
+</li>
+<li>
+<p>Floyed算法可以求出每队点之间的最短距离，它对于图的要求是，可以是无向图和有向图，边权可正可负，唯一的要求是不能有负环。</p>
+</li>
+</ul>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips2:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips2:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">2</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
+<p><strong>Floyed算法的基本思想</strong>：</p>
+<ul>
+<li>
+<p>初始化f[i][j]=w[i][j]，从小到大枚举k，对每对节点（u，v），检查它们的最短路值。</p>
+</li>
+<li>
+<p>f[i][j]表示该状态下（即路径中间只允许经过节点i~k的情况下，k递增，定义在循环内），i到j的最短路距离<br>
+其状态转移方程为：</p>
+<ol>
+<li><strong>最短路经过点k</strong>：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>[</mo><mi>j</mi><mo>]</mo><mo>=</mo><mi>f</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>[</mo><mi>k</mi><mo>]</mo><mo>+</mo><mi>f</mi><mo>[</mo><mi>k</mi><mo>]</mo><mo>[</mo><mi>j</mi><mo>]</mo><mo separator="true">;</mo></mrow><annotation encoding="application/x-tex">f[i][j]=f[i][k]+f[k][j];</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mclose">]</span><span class="mpunct">;</span></span></span></span></li>
+<li><strong>最短路不经过点k</strong>：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>[</mo><mi>j</mi><mo>]</mo><mo>=</mo><mi>f</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>[</mo><mi>j</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">f[i][j]=f[i][j]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mclose">]</span></span></span></span>（这里等号右边的f[i][j]实为上一阶段的f[i][j]）</li>
+</ol>
+</li>
+</ul>
+<p><a href="https://oj.bashu.com.cn/pub/problempage.php?problem_id=1584">1584 银行设置</a></p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips3:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips3:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">3</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
+<p><strong>初始化</strong>：</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>[</mo><mi>j</mi><mo>]</mo><mo>=</mo><mn>0</mn><mo separator="true">,</mo><mi>i</mi><mo>=</mo><mo>=</mo><mi>j</mi><mo separator="true">;</mo></mrow><annotation encoding="application/x-tex">f[i][j]=0,i==j;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mpunct">;</span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>[</mo><mi>j</mi><mo>]</mo><mo>=</mo><mi>i</mi><mi>n</mi><mi>f</mi><mo separator="true">,</mo><mi>i</mi><mo>!</mo><mo>=</mo><mi>j</mi><mo separator="true">;</mo></mrow><annotation encoding="application/x-tex">f[i][j]=inf,i!=j;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">i</span><span class="mclose">!</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mpunct">;</span></span></span></span></p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+
+#define maxn 1005
+#define inf 0x3f3f3f
+using namespace std;
+
+int f[maxn][maxn]; //操作数组，f[i][j]表示该状态下（即路径中间只允许经过节点i~k的情况下，k递增，定义在循环内），i到j的最短路距离
+int n,m;
+int a[maxn][maxn]; //
+
+void Floyed()
+{
+	for(int k=1;k&lt;=n;k++) //枚举中间点
+		for(int i=1;i&lt;=n;i++) //枚举起点
+			for(int j=1;j&lt;=n;j++) //枚举终点
+				if(f[i][k]!=inf&amp;&amp;f[k][j]!=inf)
+					f[i][j]=min(f[i][j],f[i][k]+f[k][j]);
+}
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;m;
+	for(int i=1;i&lt;=n;i++)
+		for(int j=1;j&lt;=n;j++)
+			if(i==j) f[i][j]=0;
+			else f[i][j]=inf; //初始化，自己到自己的最短路设置为0,
+	for(int i=1;i&lt;=m;i++)
+	{
+		int x,y,v;
+		cin&gt;&gt;x&gt;&gt;y&gt;&gt;v;
+		f[x][y]=f[y][x]=v; //邻接矩阵建边
+	}
+	Floyed();
+	for(int k=1;k&lt;=n;k++)
+		for(int i=1;i&lt;n;i++)
+			for(int j=i+1;j&lt;=n;j++) //为了避免重复从i+1开始遍历另一种点
+				a[i][j]+=min(f[i][k],f[k][j]); //由于设置两个银行，所以取f[i][k]与f[k][j]的最小值
+	int ans=inf;
+	int ans1,ans2;
+	for(int i=1;i&lt;n;i++)
+		for(int j=i+1;j&lt;=n;j++)
+			if(a[i][j]&lt;ans) //取最小值
+			{
+				ans=a[i][j];
+				ans1=i; //记录节点序号
+				ans2=j; 
+			}
+	cout&lt;&lt;ans1&lt;&lt;&quot; &quot;&lt;&lt;ans2&lt;&lt;endl;
+	return 0;
+}
+</code></pre>
+<h3 id="spfa算法">SPFA算法</h3>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips1:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips1:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">1</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
+<p><strong>SPFA算法的基本知识</strong>：（摘录自did的PPT，归纳的很好就直接搬运了qwq）</p>
+<ul>
+<li>
+<p>设立一个先进先出的队列用来保存待优化的节点，优化时每次取出队首节点u，并且**用u点当前的最短路径估计值对u点所指向的节点v进行松弛操作，如果v点的最短路径估计值有所调整，且v点不在当前的队列中，就将v点放入队尾。**这样不断从队列中取出节点来进行松弛操作，直至队列空为止。这个算法保证只要最短路径存在，SPFA算法必定能求出最小值。</p>
+</li>
+<li>
+<p>SPFA算法同样可以判断负环，如果某个点弹出队列的次数超过n-1次，则存在负环。对于存在负环的图，无法计算单源最短路径。</p>
+</li>
+</ul>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips2:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips2:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">2</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
+<p><strong>SPFA算法的基本操作</strong>：（摘录自did的PPT，归纳的很好就直接搬运了qwq）</p>
+<ul>
+<li>S为源点，vst[]记录点是否在队列中，距离值为dist[]</li>
+</ul>
+<ol>
+<li>
+<p>初始化，源点的距离dist[S]=0，其它点的距离设为INF，新建一个队列，将源点S入队，标记源点S已经在队列中。</p>
+</li>
+<li>
+<p>从队首取出一个点i，标记i已经出队，接着对和i点有边相连的j点进行松弛操作，如果松弛成功，则对i入队的次数进行检查，如果大于等于n，说明出现负环，算法结束；否则改进dist[j]的值，再检查j是否在队列中，如果不在，就将j点加入队尾。</p>
+</li>
+<li>
+<p>重复执行步骤2，直到队列为空。</p>
+</li>
+</ol>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips3:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips3:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">3</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
+<p><strong>常见疑惑</strong>：</p>
+<ol>
+<li>
+<p>Q：SPFA算法的复杂度？<br>
+A：玄学，平均复杂度为O(2E)，其大时可以极大，小时可以极小。</p>
+</li>
+<li>
+<p>Q：在算法中，如果后出队的点可以使前面的点更忧，而那个点的值改变了，它的子节点的值也会改变。这个时候需要入队吗？<br>
+A：需要，而且不用担心vis[i]=1的问题。当我们出队以后vis[i]会归零的。</p>
+</li>
+</ol>
+<p><a href="https://oj.bashu.com.cn/pub/problempage.php?problem_id=1580">1580 最短路(Spfa)2885</a></p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;queue&gt;
+#include &lt;cstring&gt;
+
+#define maxn 500010
+using namespace std;
+
+queue &lt;int&gt; q;
+
+int vis[maxn]; //vis[i[]表示点i是否在队中
+int d[maxn]; //d[i[]表示点i距离源点的最短路
+
+struct Edge
+{
+	int to,next,v;
+}a[maxn&lt;&lt;1]; //前向星结构体数组
+
+
+int head[maxn],cnt;
+//int used[maxn]; //这句代码可用于判断有无解时使用，本题保证有解，所以不需要了
+int n,m;
+
+void AddEdge(int x,int y,int v) //前向星建边操作
+{
+	a[++cnt].next=head[x];
+	a[cnt].to=y;
+	head[x]=cnt;
+	a[cnt].v=v;
+}
+
+int Spfa(int x)
+{
+	for(int i=1;i&lt;=n;i++)
+		d[i]=0x3f3f3f3f;
+//	memset(vis,0,sizeof(vis));
+	q.push(x);
+	vis[x]=1;
+	d[x]=0;
+	while(!q.empty())
+	{
+		int u=q.front();
+		q.pop();
+		vis[u]=0; //因为点u已出队，释放点u
+		for(int i=head[u];i;i=a[i].next)
+		{
+			int v=a[i].to;
+			if(d[v]&gt;d[u]+a[i].v)
+			{
+//				used[v]++;
+//				if(used[v]&gt;n) return 0; //这句代码可用于判断有无解时使用，本题保证有解，所以不需要了
+				d[v]=d[u]+a[i].v; //更新边权
+				if(!vis[v]) //如果点v可以遍历（可以添加）
+				{
+					vis[v]=1; //标记已在队中
+					q.push(v); //则入队
+				}
+			}
+		}
+	}
+//	return 1; //这句代码可用于判断有无解时使用，本题保证有解，所以不需要了
+}
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;m;
+	for(int i=1;i&lt;=m;i++)
+	{
+		int x,y,v;
+		cin&gt;&gt;x&gt;&gt;y&gt;&gt;v;
+		AddEdge(x,y,v);
+		AddEdge(y,x,v); //前向星建双边
+	}
+//	if(Spfa(1))
+//		cout&lt;&lt;d[n]&lt;&lt;endl; //这句代码可用于判断有无解时使用，本题保证有解，所以不需要了
+	Spfa(1);
+	cout&lt;&lt;d[n]&lt;&lt;endl; //直接输出
+	return 0;
+}
+</code></pre>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="Red"><menclose mathbackground="Yellow"><mtext>！</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\color{Red}\colorbox{Yellow}{！}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2833299999999999em;vertical-align:-0.3em;"></span><span class="mord" style="color:Red;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9833299999999998em;"><span style="top:-2.98333em;"><span class="pstrut" style="height:3.28333em;"></span><span class="stretchy colorbox" style="color:Red;height:1.2833299999999999em;background-color:Yellow;"></span></span><span style="top:-3.28333em;"><span class="pstrut" style="height:3.28333em;"></span><span class="mord boxpad" style="color:Red;"><span class="mord cjk_fallback" style="color:Red;">！</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3em;"><span></span></span></span></span></span></span></span></span></p>
+<h2 id="有向图的连通性">有向图的连通性</h2>
+<p><strong>关于有向图的相关概念</strong>：</p>
+<ul>
+<li>
+<p><strong>强连通图</strong>：有向图中，如果对每一对Vi,Vj(Vi,Vj属于V，Vi不等于Vj)。从Vi到Vj和从Vj到 Vi都存在路径，则称G是强连通图。<br>
+简单来说，即：<strong>如果一张有向图中任意两点有路径可以互相到达，则称这张图是强连通图</strong></p>
+</li>
+<li>
+<p>**强连通分量：**有向图的极大强连通子图叫强连通分量。</p>
+</li>
+<li>
+<p>**最关键通用部分：**强连通分量一定是图的深搜树的一个子树。</p>
+</li>
+</ul>
+<h3 id="tarjan算法">Tarjan算法</h3>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips1:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips1:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">1</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
+<p><strong>Tarjan算法的基本知识：</strong>（摘录自did的PPT，归纳的很好就直接搬运了qwq）</p>
+<ul>
+<li>
+<p>Tarjan算法是基于对图深度优先搜索的算法，每个强连通分量为搜索树中的一棵子树。搜索时，把当前搜索树中未处理的节点加入一个堆栈，回溯时可以判断栈顶到栈中的节点是否为一个强连通分量。</p>
+</li>
+<li>
+<p>定义DFN(u)为节点u搜索的次序编号(时间戳)，Low (u)为u或u的子树能够追溯到的最早的栈中节点的次序号。</p>
+</li>
+<li>
+<p>当DFN(u)=Low(u)时，以u为根的搜索子树上所有节点是一个强连通分量。</p>
+</li>
+</ul>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips2:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips2:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">2</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
+<p><strong>Tarjan算法的基本操作</strong>：</p>
+<ul>
+<li>
+<p>找一个没有被访问过的节点u；否则，算法结束；(图不连通)</p>
+</li>
+<li>
+<p>初始化dfn[u]和low[u]<br>
+对于u所有的邻接顶点v：</p>
+<ol>
+<li>如果没有访问过，则转到步骤(2)，同时维护low[u]；</li>
+<li>如果访问过，但没有删除，维护low[u]；</li>
+</ol>
+</li>
+<li>
+<p>如果low[u]==dfn[u]，那么输出相应的强连通分量。</p>
+</li>
+</ul>
+<p><a href="https://oj.bashu.com.cn/pub/problempage.php?problem_id=1572">1572 消息的传递2269</a></p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;stack&gt;
+
+#define maxn 1005
+#define inf 0x7fffffff/2
+using namespace std;
+
+stack &lt;int&gt; q;
+int in[maxn][maxn]; //入度
+int DFN[maxn],LOW[maxn]; 
+int from[maxn]; //找所属 
+bool flag[maxn]; //标记数组
+int bein[maxn]; //强连通分量入度 
+
+int cnt;
+int t; //时间戳 
+int y;
+int n;
+
+void Tarjan(int x)
+{
+	DFN[x]=LOW[x]=++t; //给x按照访问顺序的先后标号为t，给LOW[x]赋初始值
+	q.push(x); //x点进栈
+	flag[x]=1; //这个用来判断横叉边
+	for(int i=1;i&lt;=n;i++)
+		if(in[x][i]) //边xi没有被标记过
+			if(!DFN[i]) //i未被标记过
+			{
+				Tarjan(i); //xi是父子边，递归访问
+				LOW[x]=min(LOW[i],LOW[x]);
+			}
+			else if(flag[i])
+				LOW[x]=min(DFN[i],LOW[x]); //xi是返祖边
+	if(LOW[x]==DFN[x]) //统计块数
+	{
+		cnt++;
+		while(y!=x)
+		{
+			y=q.top();
+			q.pop();
+			from[y]=cnt; //定义当前快的编号为cnt
+			flag[y]=0; //释放标记
+		}
+	}
+}
+
+int main()
+{
+	cin&gt;&gt;n;
+	for(int i=1;i&lt;=n;i++)
+		for(int j=1;j&lt;=n;j++)
+			cin&gt;&gt;in[i][j]; //邻接矩阵存储边关系
+	for(int i=1;i&lt;=n;i++)
+		if(!DFN[i]) Tarjan(i); //如果没有遍历过，则遍历一遍
+	for(int i=1;i&lt;=n;i++)
+		for(int j=1;j&lt;=n;j++)
+			if(in[i][j]&amp;&amp;from[i]!=from[j])
+				bein[from[j]]++; //统计每个块的入度
+	int sum=0; //统计需要传播给多少个人
+	for(int i=1;i&lt;=cnt;i++)
+		if(!bein[i])
+			sum++; //如果有块入度为零，代表必须单独传播信息，所以sum++
+	cout&lt;&lt;sum&lt;&lt;endl;
+	return 0;
+}
+</code></pre>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="Red"><menclose mathbackground="Yellow"><mtext>！</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\color{Red}\colorbox{Yellow}{！}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2833299999999999em;vertical-align:-0.3em;"></span><span class="mord" style="color:Red;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9833299999999998em;"><span style="top:-2.98333em;"><span class="pstrut" style="height:3.28333em;"></span><span class="stretchy colorbox" style="color:Red;height:1.2833299999999999em;background-color:Yellow;"></span></span><span style="top:-3.28333em;"><span class="pstrut" style="height:3.28333em;"></span><span class="mord boxpad" style="color:Red;"><span class="mord cjk_fallback" style="color:Red;">！</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3em;"><span></span></span></span></span></span></span></span></span></p>
+<h3 id="无向图的连通性">无向图的连通性</h3>
+<p><strong>关于无向图的相关概念</strong>：</p>
+<ul>
+<li>
+<p><strong>割点</strong>：</p>
+<ol>
+<li>
+<p>定义：<br>
+在双连通图上, 任何一对顶点之间至少存在有两条路径，在删去某个顶点及与该顶点相关联的边时, 也不破坏图的连通性。<strong>如果一个图不是双连通的，那么，将其删除后图将不再连通的那些顶点称为割点。</strong><br>
+简言之：<strong>G是连通图，u∈V(G)，G–u不再连通，则称u是G的割点。</strong></p>
+</li>
+<li>
+<p>求割点的算法：<br>
+我们通过DFS把无向图定向成有向图，定义每个顶点两个参数：<br>
+① dfn[u]表示顶点u访问的先后顺序。<br>
+② lowlink[u]表示沿u出发的有向轨能够到达的点v中，dfn[v]值的最小值 (经过返祖边后则停止)</p>
+</li>
+<li>
+<p>三个定理<br>
+【定理1】：DFS中，e=ab是返祖边，那么要么a是b的祖先，要么a是b的后代子孙。<br>
+【定理2】：DFS中，e=uv是父子边，且dfn[u]&gt;1，lowlink[v]≥dfn[u]，则u是割点。<br>
+【定理3】：DFS的根r是割点的充要条件是：至少有2条以r为尾(从r出发)的父子边。</p>
+</li>
+<li>
+<p>求割点的算法：</p>
+</li>
+</ol>
+<pre><code>void DFS(int u)
+{ 
+	sign++;
+	dfn[u]=sign; //给u按照访问顺序的先后标号为sign
+	lowlink[u]=sign; //给lowlink[u]赋初始值
+	for(int v=1;v&lt;=n;v++) //寻找一个u的相邻节点v
+		if(MAP[u][v]&amp;&amp;prt[u]!=v) // u→v有边相连且不是回边
+		{
+      	if(dfn[v]==0) //v未被访问
+			{
+          	prt[v]=u; //则u是v的父亲
+				DFS(v); //uv是父子边，递归访问v
+				lowlink[u]=min(lowlink[u],lowlink[v]);//所有儿子中最小值
+				if(lowlink[v]&gt;=dfn[u])
+				{
+              	if(dfn[u]==1)
+                  {
+                  	son++;
+                      if(son&gt;=2) cout&lt;&lt;u&lt;&lt;endl;
+                  }//根
+				else cout&lt;&lt;u&lt;&lt;endl;//u是割点
+		        }
+	       }
+         else lowlink[u]= min(lowlink[u],dfn[v]);
+	   //若已访问则访问时间一定早于u，uv是返祖边
+    }
+}
+</code></pre>
+</li>
+<li>
+<p><strong>割边</strong>：</p>
+<ol>
+<li>定义：<br>
+G是连通图，e∈E(G)，G-e不再连通，则称e是G的割边，亦称做桥。</li>
+</ol>
+<p>2.求割边的算法<br>
+与割点类似的，我们定义low和dfn。父子边e=u→v ，当且仅当low[v]&gt;dfn[u]的时候，e是割边。</p>
+<p>3.求割边的参考代码：</p>
+<pre><code>void DFS(int u)
+{
+   sign++;
+   dfn[u]=sign; //给u按照访问顺序的先后标号为sign
+   lowlink[u]=sign; //给lowlink[u]赋初始值
+   for(寻找一个u的相邻节点v)
+      if(边uv没有被标记过)
+      {
+         标记边uv;
+         给边定向u→v;
+         if(v未被标记过)
+         {
+            DFS(v); //uv是父子边，递归访问
+            lowlink[u]=min(lowlink[u],lowlink[v]);
+            if(lowlink[v]&gt;dfn[u])uv是割边
+         }
+         else lowlink[u]=min(lowlink[u],dfn[v]);//uv是返祖边
+      }
+}
+</code></pre>
+<ol start="4">
+<li>割点与割边<br>
+<strong>两个割点之间的边不是割边，割边的两端点不是割点。</strong></li>
+</ol>
+</li>
+<li>
+<p>块<br>
+1.定义：<br>
+没有割点的图叫2-连通图，亦称做块。把每个块收缩成一个点，就得到一棵树，它的边就是桥。</p>
+<p>2.求块的算法：<br>
+在求割点的算法中，当结点u的所有邻边都被访问过之后，如果存lowlink[u]=dfn[u]，我们把u下方的整块和u导出作为图中的一个块。<br>
+这里需要用一个<strong>栈</strong>来表示哪些元素是u代表的块。</p>
+</li>
+</ul>
+<h2 id="关键路径">关键路径</h2>
+<p><strong>关于关键路径的相关概念</strong>：</p>
+<p>定义：在一个给定的有向无环图中，求从<strong>开始顶点到结束顶点的最长路径</strong>（路径上的<br>
+权值和）叫关键路径。</p>
+<p>算法步骤：</p>
+<ol>
+<li>读入数据，建立有向图</li>
+<li>对DAG进行拓扑排序，得到拓扑序列</li>
+<li><strong>以拓扑序列为阶段，用DP求关键路径</strong></li>
+</ol>
+<p><a href="https://oj.bashu.com.cn/pub/problempage.php?problem_id=1570">1570 工厂的烦恼</a></p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+
+#define maxn 1005
+#define inf 0x7fffffff/2
+using namespace std;
+
+int bein[maxn];
+int a[maxn];
+int f[maxn]; //f[a[i]]表示到达顶点a[i]的最长路径
+int in[maxn][maxn];
+int n,m;
+
+void Topsort() //拓扑排序，不解释，详细内容本博客开头有介绍
+{
+	int j;
+	for(int i=1;i&lt;=n;i++)
+	{
+		j=1;
+		while((j&lt;=n)&amp;&amp;(bein[j]!=0)) j++;
+		bein[j]=inf;
+		a[i]=j;
+		for(int k=1;k&lt;=n;k++)
+			if(in[j][k]) bein[k]--;
+	}
+}
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;m;
+	for(int i=1;i&lt;=m;i++)
+	{
+		int x,y,v;
+		cin&gt;&gt;x&gt;&gt;y&gt;&gt;v;
+		in[x][y]=v;
+		bein[y]++;
+	} //配合拓扑排序及符合题意的输入，不解释
+	Topsort();
+	for(int i=2;i&lt;=n;i++) //以拓扑序列为阶段
+		for(int j=1;j&lt;=i-1;j++)
+			f[a[i]]=max(in[a[j]][a[i]]+f[a[j]],f[a[i]]); //DP求关键路径	
+	cout&lt;&lt;f[a[n]]&lt;&lt;endl;
+	return 0;
+}
+</code></pre>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="Red"><menclose mathbackground="Yellow"><mtext>！</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\color{Red}\colorbox{Yellow}{！}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2833299999999999em;vertical-align:-0.3em;"></span><span class="mord" style="color:Red;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9833299999999998em;"><span style="top:-2.98333em;"><span class="pstrut" style="height:3.28333em;"></span><span class="stretchy colorbox" style="color:Red;height:1.2833299999999999em;background-color:Yellow;"></span></span><span style="top:-3.28333em;"><span class="pstrut" style="height:3.28333em;"></span><span class="mord boxpad" style="color:Red;"><span class="mord cjk_fallback" style="color:Red;">！</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3em;"><span></span></span></span></span></span></span></span></span></p>
+<h2 id="差分约束系统">差分约束系统</h2>
+<p>像这样一类问题：给定一组不等式x[i]-x[j]&lt;=c<a href="%E6%88%96x%5Bi%5D-x%5Bj%5D%3E=c%5Bk%5D">k</a>，需要求出满足所有不等式的一组解(x[1],x[2],…,x[n])。</p>
+<p>这类问题实际上是线性规划的一类简单问题。<strong>通常可以用系数矩阵表示为Ax&lt;=C(或Ax&gt;=C),其中系数矩阵A的每一行里有一个1和一个-1，其余元素都为0。若A 为m<em>n的矩阵，则x为n</em>1的矩阵，C为m*1的矩阵，对应有m个不等式，n个未知数，即该系统为一个有n个未知数、m个约束条件的系统。这就是差分约束系统。</strong></p>
+<p>如果一组解(x[1],x[2],….,x[n])满足给定的不等式组，那么(x[1]+a,x[2]+a,….,x[n]+a)也能够满足，**所以这类问题的解不唯一。**实际问题中通常对输出的解有一些特别的要求。</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
+<p><strong>自己的一些零碎总结</strong>：</p>
+<ul>
+<li>
+<p>差分约束系统将题目中的约束条件不等式（即d[x]+w(x,t)&gt;=d[y]或d[x]+w(x,t)&lt;=d[y]之类）转换为图论的单源最短路问题。</p>
+</li>
+<li>
+<p>当不等式是 <strong>d[x]+w(x,t)&gt;=d[y]</strong> 时，求最短路；当题目不等式是 <strong>d[x]+w(x,t)&lt;=d[y]</strong> 时，求最长路。</p>
+</li>
+<li>
+<p>有负权回路的有向图不存在最短路径，即无解。</p>
+</li>
+<li>
+<p>注意建边时是<strong>j到i建边</strong>，其原因是不等式。</p>
+</li>
+</ul>
+<p><a href="https://oj.bashu.com.cn/pub/problempage.php?problem_id=1595">1595 工程规划1252</a></p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;queue&gt;
+#include &lt;cstring&gt;
+
+#define maxn 5005
+using namespace std;
+
+struct sj {
+	int to,next,w;
+} a[maxn&lt;&lt;1]; //前向星结构体数组
+
+int kk,inf,n,m,cnt[maxn],flag;
+int head[maxn],size;
+int v[maxn],dis[maxn];
+int fag;
+
+void AddEdge(int x,int y,int z) {
+	a[++size].to=y;
+	a[size].next=head[x];
+	head[x]=size;
+	a[size].w=z;
+} //前向星建边操作
+
+void SPFA(int s) { //普通SPFA跑一遍，不解释，详细介绍前面有
+	queue&lt;int&gt;q;
+	q.push(s);
+	dis[s]=0;
+	while(!q.empty()) {
+		int x=q.front();
+		q.pop();
+		cnt[x]++;
+		if(cnt[x]&gt;n) {
+			cout&lt;&lt;&quot;NO SOLUTION&quot;&lt;&lt;endl;
+			fag=1;
+			return ;
+		}
+		for(int i=head[x]; i; i=a[i].next) {
+			int tt=a[i].to;
+			if(dis[tt]&gt;dis[x]+a[i].w) {
+				dis[tt]=dis[x]+a[i].w;
+				if(!v[tt])
+					q.push(tt),v[tt]=1;
+			}
+		}
+		v[x]=0;
+	}
+}
+
+int main() {
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	for(int i=1; i&lt;=m; i++) {
+		int x,y,z;
+		scanf(&quot;%d%d%d&quot;,&amp;x,&amp;y,&amp;z);
+		AddEdge(y,x,z); //一定注意，是y向x连边
+	}
+	memset(dis,127,sizeof(dis));
+	for(int i=1; i&lt;=n; i++) { //构建虚拟超级源点，所有边都连上
+		AddEdge(0,i,0);
+	}
+	SPFA(0);
+	if(!fag) {
+		for(int i=1; i&lt;=n; i++)
+			kk=min(kk,dis[i]); //寻找最小值
+		for(int i=1; i&lt;=n; i++)
+			printf(&quot;%d\n&quot;,dis[i]-kk);
+	}
+	return 0;
+}
+</code></pre>
+<hr>
+<h2 id="后记-by-2020331">后记 by 2020.3.31</h2>
+<p>由于时间仓促，后面的代码等内容可能没有前面详尽。当然，本蒟蒻在写作过程中肯定有不对之处，还希望大佬们广泛地提出问题，以便我和大家更好的知识掌握。</p>
+<p>感谢您的认真观看！</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E7%89%B9%E5%88%AB%E7%89%B9%E5%88%AB%E6%84%9F%E8%B0%A2">特别特别感谢：</a>
+<ul>
+<li><a href="#lmpp">lmpp</a></li>
+<li><a href="#lmpp%E5%A4%A7%E4%BD%AC%E7%9A%84%E5%8D%9A%E5%AE%A2">lmpp大佬的博客</a></li>
+<li><a href="#hcq%E5%A4%A7%E4%BD%AC%E5%9C%A8%E6%9C%AC%E5%8D%9A%E5%AE%A2%E5%8F%91%E8%A1%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E6%97%B6%E9%97%B4%E5%B0%B1%E6%8F%90%E5%87%BA%E4%BA%86%E8%AE%B8%E5%A4%9A%E5%AE%9D%E8%B4%B5%E5%BB%BA%E8%AE%AE">hcq大佬在本博客发表的第一时间就提出了许多宝贵建议！！</a>
+<ul>
+<li><a href="#%E8%BF%98%E6%9C%89gmq-gbf%E5%90%8C%E5%AD%A6%E6%84%9F%E8%B0%A2%E4%BD%A0%E4%BB%AC%E7%9A%84%E9%BC%93%E5%8A%B1%E4%B8%8E%E6%94%AF%E6%8C%81">还有gmq、gbf同学，感谢你们的鼓励与支持！！</a></li>
+<li><a href="#did%E6%95%99%E7%BB%99%E6%88%91%E7%9F%A5%E8%AF%86%E7%9C%9F%E6%98%AF%E5%A4%AA%E5%BC%BA%E4%BA%86">did教给我知识真是太强了！！</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E6%8F%90%E7%A4%BA">提示：</a></li>
+<li><a href="#%E6%9B%B4%E6%96%B0%E4%BF%A1%E6%81%AF">更新信息</a></li>
+<li><a href="#%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F">拓扑排序：</a></li>
+<li><a href="#%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91">最小生成树</a>
+<ul>
+<li><a href="#kruskal%E7%AE%97%E6%B3%95">Kruskal算法</a></li>
+<li><a href="#prim%E7%AE%97%E6%B3%95">Prim算法</a></li>
+</ul>
+</li>
+<li><a href="#%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98">最短路径问题</a>
+<ul>
+<li><a href="#dijkstra%E7%AE%97%E6%B3%95">Dijkstra算法</a></li>
+<li><a href="#floyed%E7%AE%97%E6%B3%95">Floyed算法</a></li>
+<li><a href="#spfa%E7%AE%97%E6%B3%95">SPFA算法</a></li>
+</ul>
+</li>
+<li><a href="#%E6%9C%89%E5%90%91%E5%9B%BE%E7%9A%84%E8%BF%9E%E9%80%9A%E6%80%A7">有向图的连通性</a>
+<ul>
+<li><a href="#tarjan%E7%AE%97%E6%B3%95">Tarjan算法</a></li>
+<li><a href="#%E6%97%A0%E5%90%91%E5%9B%BE%E7%9A%84%E8%BF%9E%E9%80%9A%E6%80%A7">无向图的连通性</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84">关键路径</a></li>
+<li><a href="#%E5%B7%AE%E5%88%86%E7%BA%A6%E6%9D%9F%E7%B3%BB%E7%BB%9F">差分约束系统</a></li>
+<li><a href="#%E5%90%8E%E8%AE%B0-by-2020331">后记 by 2020.3.31</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://MrContinue.github.io/post/lian-xi-wo/">
+              <h3 class="post-title">
+                联系我
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '',
+    clientSecret: '',
+    repo: '',
+    owner: '',
+    admin: [''],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://MrContinue.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

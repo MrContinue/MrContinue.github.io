@@ -1,0 +1,299 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BSOJ1515 无限硬币问题 | Continue的博客</title>
+<link rel="shortcut icon" href="https://MrContinue.github.io/favicon.ico?v=1586600307676">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://MrContinue.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="BSOJ1515 无限硬币问题 | Continue的博客 - Atom Feed" href="https://MrContinue.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="Description
+输入硬币的n种不同面值(各种面值的硬币个数不限)和m。
+输出构成1到m元的最少硬币数。
+
+Input
+第一行两个数n(n&lt;=200),m(m&lt;=10000)
+第二行n个面值
+
+Output
+共m行，每行为..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://MrContinue.github.io">
+  <img class="avatar" src="https://MrContinue.github.io/images/avatar.png?v=1586600307676" alt="">
+  </a>
+  <h1 class="site-title">
+    Continue的博客
+  </h1>
+  <p class="site-description">
+    请你照亮我前进的路
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="https://MrContinue.github.io/post/about-me" class="menu">
+          About Me
+        </a>
+      
+    
+      
+        <a href="https://MrContinue.github.io/post/wo-de-hao-peng-you-meng" class="menu">
+          我的好朋友萌！（友链）
+        </a>
+      
+    
+      
+        <a href="https://MrContinue.github.io/post/lian-xi-wo" class="menu">
+          联系方式
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/MrContinue" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+        <a href="https://www.zhihu.com/people/gradually-disappear" target="_blank">
+          <i class="ri-zhihu-line"></i>
+        </a>
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              BSOJ1515 无限硬币问题
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-04-11
+              </span>
+              <span>
+                3 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="description">Description</h2>
+<pre><code>输入硬币的n种不同面值(各种面值的硬币个数不限)和m。
+输出构成1到m元的最少硬币数。
+</code></pre>
+<h2 id="input">Input</h2>
+<pre><code>第一行两个数n(n&lt;=200),m(m&lt;=10000)
+第二行n个面值
+</code></pre>
+<h2 id="output">Output</h2>
+<pre><code>共m行，每行为组成该值所需最少硬币数(若不能组成则输出-1)
+</code></pre>
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>3 4
+1 2 3
+</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>1
+1
+1
+2
+</code></pre>
+<hr>
+<p><s>我太菜了，又来水DP基础题QAQ</s></p>
+<p>这是一道DP的water problem</p>
+<p>是美妙的背包啊~</p>
+<hr>
+<h2 id="一状态与定义">一：状态与定义</h2>
+<p>f[i]表示凑齐i元所需的最少硬币数。</p>
+<h2 id="二状态转移">二：状态转移</h2>
+<p>当我们并没有计算过当前的硬币数时，<strong>用（i-a[j]）元时的硬币数+1</strong>（这个1就是减的那一个硬币值a[j]）。</p>
+<p>而当我们已有了一个当前最小硬币数时，<strong>则将其与上一阶段最小硬币数小比较，取min。</strong></p>
+<p>具体的公式如下：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mrow><mo fence="true">{</mo><mtable><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>f</mi><mo>[</mo><mi>i</mi><mo>−</mo><mi>a</mi><mo>[</mo><mi>j</mi><mo>]</mo><mo>]</mo><mo>+</mo><mn>1</mn><mspace width="2em"/></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>f</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>=</mo><mo>=</mo><mn>0</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>m</mi><mi>i</mi><mi>n</mi><mo>(</mo><mi>f</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo separator="true">,</mo><mi>f</mi><mo>[</mo><mi>i</mi><mo>−</mo><mi>a</mi><mo>[</mo><mi>j</mi><mo>]</mo><mo>]</mo><mo>+</mo><mn>1</mn><mo>)</mo><mspace width="2em"/></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>f</mi><mo>!</mo><mo>=</mo><mn>0</mn></mrow></mstyle></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">f(x) =
+\begin{cases}
+f[i-a[j]]+1 \qquad &amp; f[i]==0 \\
+min(f[i],f[i-a[j]]+1) \qquad &amp; f!=0
+\end{cases}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.0000299999999998em;vertical-align:-1.25003em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">{</span></span><span class="mord"><span class="mtable"><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault">a</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mclose">]</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:2em;"></span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault">a</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mclose">]</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:2em;"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.19em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:1em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">0</span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mclose">!</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.19em;"><span></span></span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>0&lt;=i&lt;=m ; 1&lt;=j&lt;=n。</p>
+<h2 id="三初始化">三：初始化</h2>
+<p>f[i]=0；</p>
+<h2 id="代码">代码</h2>
+<p>※由于我们的状态定义是直接储存的答案，所以直接输出啦~</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+
+#define maxn 10010
+using namespace std;
+
+int a[maxn];
+int f[maxn];
+
+int main()
+{
+	int n,m;
+	scanf(&quot;%d %d&quot;,&amp;n,&amp;m);
+	for(int i=1;i&lt;=n;i++)
+		scanf(&quot;%d&quot;,&amp;a[i]); //输入硬币值 
+	for(int i=0;i&lt;=m;i++)
+		for(int j=1;j&lt;=n;j++)
+			if(i&gt;=a[j]) //这里要判断一下 不然等会会越界 
+			{
+				if(f[i]==0) f[i]=f[i-a[j]]+1;
+				else f[i]=min(f[i],f[i-a[j]]+1);				
+			}
+	for(int i=1;i&lt;=m;i++)
+		printf(&quot;%d\n&quot;,f[i]); 
+	return 0;
+}
+
+</code></pre>
+<hr>
+<h6 id="希望各位喜欢-求点赞qaq">希望各位喜欢 求点赞QAQ</h6>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#description">Description</a></li>
+<li><a href="#input">Input</a></li>
+<li><a href="#output">Output</a></li>
+<li><a href="#sample-input">Sample Input</a></li>
+<li><a href="#sample-output">Sample Output</a></li>
+<li><a href="#%E4%B8%80%E7%8A%B6%E6%80%81%E4%B8%8E%E5%AE%9A%E4%B9%89">一：状态与定义</a></li>
+<li><a href="#%E4%BA%8C%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB">二：状态转移</a></li>
+<li><a href="#%E4%B8%89%E5%88%9D%E5%A7%8B%E5%8C%96">三：初始化</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81">代码</a><br>
+*<br>
+*<br>
+*<br>
+* <a href="#%E5%B8%8C%E6%9C%9B%E5%90%84%E4%BD%8D%E5%96%9C%E6%AC%A2-%E6%B1%82%E7%82%B9%E8%B5%9Eqaq">希望各位喜欢 求点赞QAQ</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://MrContinue.github.io/post/bsoj1527-gai-fang-zi-1697/">
+              <h3 class="post-title">
+                BSOJ1527 盖房子(1697)
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '',
+    clientSecret: '',
+    repo: '',
+    owner: '',
+    admin: [''],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://MrContinue.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

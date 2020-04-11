@@ -1,0 +1,392 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BSOJ1569 关押罪犯2809 | Continue的博客</title>
+<link rel="shortcut icon" href="https://MrContinue.github.io/favicon.ico?v=1586600307676">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://MrContinue.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="BSOJ1569 关押罪犯2809 | Continue的博客 - Atom Feed" href="https://MrContinue.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="Description
+S城现有两座监狱，一共关押着N名罪犯，编号分别为1~N。他们之间的关系自然也极不和谐。很多罪犯之间甚至积怨已久，如果客观条件具备则随时可能爆发冲突。
+我们用“怨 气值”（一个正整数值）来表示某两名罪犯之间的仇恨程度，..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://MrContinue.github.io">
+  <img class="avatar" src="https://MrContinue.github.io/images/avatar.png?v=1586600307676" alt="">
+  </a>
+  <h1 class="site-title">
+    Continue的博客
+  </h1>
+  <p class="site-description">
+    请你照亮我前进的路
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="https://MrContinue.github.io/post/about-me" class="menu">
+          About Me
+        </a>
+      
+    
+      
+        <a href="https://MrContinue.github.io/post/wo-de-hao-peng-you-meng" class="menu">
+          我的好朋友萌！（友链）
+        </a>
+      
+    
+      
+        <a href="https://MrContinue.github.io/post/lian-xi-wo" class="menu">
+          联系方式
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/MrContinue" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+        <a href="https://www.zhihu.com/people/gradually-disappear" target="_blank">
+          <i class="ri-zhihu-line"></i>
+        </a>
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              BSOJ1569 关押罪犯2809
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-04-11
+              </span>
+              <span>
+                6 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="description">Description</h2>
+<pre><code>S城现有两座监狱，一共关押着N名罪犯，编号分别为1~N。他们之间的关系自然也极不和谐。很多罪犯之间甚至积怨已久，如果客观条件具备则随时可能爆发冲突。
+我们用“怨 气值”（一个正整数值）来表示某两名罪犯之间的仇恨程度，怨气值越大，则这两名罪犯之间的积怨越多。
+如果两名怨气值为 c 的罪犯被关押在同一监狱，他们俩之间会发生摩擦，并造成影响力为c的冲突事件。
+每年年末，警察局会将本年内监狱中的所有冲突事件按影响力从大到小排成一个列表，然后上报到S城Z市长那里。
+公务繁忙的Z市长只会去看列表中的第一个事件的影响力， 如果影响很坏，他就会考虑撤换警察局长。
+在详细考察了N名罪犯间的矛盾关系后，警察局长觉得压力巨大。他准备将罪犯们在两座监狱内重新分配，以求产生的冲突事件影响力都较小，从而保住自己的乌纱帽。
+假设只要处于同一监狱内的某两个罪犯间有仇恨，那么他们一定会在每年的某个时候发生摩擦。
+那么，应如何分配罪犯，才能使Z市长看到的那个冲突事件的影响力最小？这个最小值是多少？
+</code></pre>
+<h2 id="input">Input</h2>
+<pre><code>输入文件名为 prison.in。输入文件的每行中两个数之间用一个空格隔开。
+第一行为两个正整数N和M，分别表示罪犯的数目以及存在仇恨的罪犯对数。
+接下来的M行每行为三个正整数 aj，bj，cj，表示aj号和bj号罪犯之间存在仇恨，其怨气值为cj。数据保证1≤aj
+</code></pre>
+<h2 id="output">Output</h2>
+<pre><code>输出文件prison.out共1行，为Z市长看到的那个冲突事件的影响力。如果本年内监狱 中未发生任何冲突事件，请输出0。
+</code></pre>
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>4 6
+1 4 2534
+2 3 3512
+1 2 28351
+1 3 6618
+2 4 1805
+3 4 12884
+</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>3512
+</code></pre>
+<h2 id="hint">Hint</h2>
+<pre><code>【输入输出样例说明】
+罪犯之间的怨气值如下面左图所示，右图所示为罪犯的分配方法，市长看到的冲突事件 影响力是3512（由2号和3号罪犯引发）。
+其他任何分法都不会比这个分法更优。
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://s2.ax1x.com/2020/03/01/3cln8e.png" alt="" loading="lazy"></figure>
+<pre><code>【数据范围】
+对于30%的数据有N≤15。
+对于70%的数据有N≤2000，M≤50000。
+对于100%的数据有N≤20000，M≤100000。
+</code></pre>
+<hr>
+<p>这里是<strong>并查集</strong>做法（二分图什么的我就是太菜了QAQ）</p>
+<hr>
+<p>首先请先回忆一下并查集的几个基本操作：</p>
+<h2 id="一并查集基本操作">一：并查集基本操作</h2>
+<h3 id="1初始化">1.初始化</h3>
+<p>在最开始时，每个节点的根应初始化为自己。</p>
+<pre><code>for(int i=1;i&lt;=n;i++)
+	prt[i]=i;
+</code></pre>
+<h3 id="2找根">2.找根</h3>
+<p>思路：寻找当前元素的原始根节点（就是寻找它最爸爸的爸爸），然后return一下就行。</p>
+<p>记住要压缩一下哦~</p>
+<pre><code>int GetFather(int x)
+{
+	if(prt[x]==x) return x; //如果自己是自己的根，那就说明这是最原始的根节点，这个节点没有自己的父亲了，返回这个根
+	prt[x]=GetFather(prt[x]); //压缩一下，找父亲
+	return prt[x]; //返回父亲的值
+}
+</code></pre>
+<h3 id="3连根">3.连根</h3>
+<p>只需要找到两个操作元素的根，然后再让其中一个根成为另一个根的儿子即可。</p>
+<pre><code>void AddEdge(int x,int y)
+{
+	int f1=GetFather(x); //找根
+	int f2=GetFather(y);
+	prt[f1]=f2; //让其中一个根节点成为另一个的儿子
+}
+</code></pre>
+<h3 id="4查找">4.查找</h3>
+<p>查找是否是同一个根。</p>
+<pre><code>bool Search(int x,int y)
+{
+	int f1=GetFather(x); //找根
+	int f2=GetFather(y);
+    if(f1==f2) return true; //一个根就返回真值
+    return false; //否则返回假值
+}
+</code></pre>
+<h2 id="二思路">二：思路</h2>
+<p>先<strong>从大到小</strong>将罪犯的怨气值排序。</p>
+<p>接着请回忆一下<strong>团伙</strong>这道题。里面有提到一个关键的点。</p>
+<pre><code>我敌人的敌人是我的朋友
+</code></pre>
+<p>于是乎，我们决定尝试罪犯1同罪犯2的<strong>敌人</strong>放到同一个监狱。如果能保证同一个监狱的两个罪犯是相对的<strong>朋友</strong>，那此时的怨气值一定是最小的。如果存在这样的分法，直接输出。</p>
+<p>绕绕的，您多品品。</p>
+<h2 id="三代码">三：代码</h2>
+<p>对代码中变量的一些解释：</p>
+<ul>
+<li>Edge[]储存两个罪犯及其怨气值</li>
+<li>prt[]储存父节点</li>
+<li>en[]储存敌人</li>
+</ul>
+<p>上代码：</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+
+#define maxn 100010
+using namespace std;
+
+struct Edge
+{
+	int pre1,pre2;
+	int v;
+}a[maxn];
+
+int prt[maxn];
+int en[maxn];
+
+int GetFather(int x)
+{
+	if(prt[x]==x) return x;
+	prt[x]=GetFather(prt[x]);
+	return prt[x]; 
+}
+
+void AddEdge(int x,int y)
+{
+	int f1=GetFather(x);
+	int f2=GetFather(y);
+	prt[f1]=f2; 
+}
+
+bool Search(int x,int y)
+{
+	int f1=GetFather(x);
+	int f2=GetFather(y);
+    if(f1==f2) return true;
+    return false;
+}
+
+bool cmp(Edge x,Edge y)
+{
+	return x.v&gt;y.v;
+}
+
+int main()
+{
+	int n,m;
+	scanf(&quot;%d %d&quot;,&amp;n,&amp;m);
+	for(int i=1;i&lt;=n;i++)
+		prt[i]=i;
+	for(int i=1;i&lt;=m;i++)
+		scanf(&quot;%d %d %d&quot;,&amp;a[i].pre1,&amp;a[i].pre2,&amp;a[i].v);
+	sort(a+1,a+m+1,cmp);
+	for(int i=1;i&lt;=m+1;i++)
+	{
+		int p1=a[i].pre1;
+		int p2=a[i].pre2;
+		if(Search(p1,p2))
+		{
+			printf(&quot;%d\n&quot;,a[i].v);
+			return 0;
+		}
+		if(!en[p1]) en[p1]=p2;
+		else AddEdge(en[p1],p2);
+		
+		if(!en[p2]) en[p2]=p1;
+		else AddEdge(en[p2],p1);
+	}
+	return 0;
+}
+</code></pre>
+<h6 id="喜欢请点个赞嘛qaq">喜欢请点个赞嘛QAQ</h6>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#description">Description</a></li>
+<li><a href="#input">Input</a></li>
+<li><a href="#output">Output</a></li>
+<li><a href="#sample-input">Sample Input</a></li>
+<li><a href="#sample-output">Sample Output</a></li>
+<li><a href="#hint">Hint</a></li>
+<li><a href="#%E4%B8%80%E5%B9%B6%E6%9F%A5%E9%9B%86%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">一：并查集基本操作</a>
+<ul>
+<li><a href="#1%E5%88%9D%E5%A7%8B%E5%8C%96">1.初始化</a></li>
+<li><a href="#2%E6%89%BE%E6%A0%B9">2.找根</a></li>
+<li><a href="#3%E8%BF%9E%E6%A0%B9">3.连根</a></li>
+<li><a href="#4%E6%9F%A5%E6%89%BE">4.查找</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8C%E6%80%9D%E8%B7%AF">二：思路</a></li>
+<li><a href="#%E4%B8%89%E4%BB%A3%E7%A0%81">三：代码</a><br>
+*<br>
+*<br>
+*<br>
+* <a href="#%E5%96%9C%E6%AC%A2%E8%AF%B7%E7%82%B9%E4%B8%AA%E8%B5%9E%E5%98%9Bqaq">喜欢请点个赞嘛QAQ</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://MrContinue.github.io/post/bsoj1626-wang-luo-poj11443596/">
+              <h3 class="post-title">
+                BSOJ1626 网络（POJ1144）3596
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '',
+    clientSecret: '',
+    repo: '',
+    owner: '',
+    admin: [''],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://MrContinue.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

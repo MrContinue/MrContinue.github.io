@@ -1,0 +1,314 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BSOJ1527 盖房子(1697) | Continue的博客</title>
+<link rel="shortcut icon" href="https://MrContinue.github.io/favicon.ico?v=1586600307676">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://MrContinue.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="BSOJ1527 盖房子(1697) | Continue的博客 - Atom Feed" href="https://MrContinue.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="Description
+永恒の灵魂最近得到了面积为n*m的一大块土地（高兴ING^_^），他想在这块土地上建造一所房子.
+这个房子必须是正方形的。
+但是，这块土地并非十全十美，上面有很多不平坦的地方（也可以叫瑕疵）。
+这些瑕疵十分恶心，以至..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://MrContinue.github.io">
+  <img class="avatar" src="https://MrContinue.github.io/images/avatar.png?v=1586600307676" alt="">
+  </a>
+  <h1 class="site-title">
+    Continue的博客
+  </h1>
+  <p class="site-description">
+    请你照亮我前进的路
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="https://MrContinue.github.io/post/about-me" class="menu">
+          About Me
+        </a>
+      
+    
+      
+        <a href="https://MrContinue.github.io/post/wo-de-hao-peng-you-meng" class="menu">
+          我的好朋友萌！（友链）
+        </a>
+      
+    
+      
+        <a href="https://MrContinue.github.io/post/lian-xi-wo" class="menu">
+          联系方式
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/MrContinue" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+        <a href="https://www.zhihu.com/people/gradually-disappear" target="_blank">
+          <i class="ri-zhihu-line"></i>
+        </a>
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              BSOJ1527 盖房子(1697)
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-04-11
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="description">Description</h2>
+<pre><code>永恒の灵魂最近得到了面积为n*m的一大块土地（高兴ING^_^），他想在这块土地上建造一所房子.
+这个房子必须是正方形的。
+但是，这块土地并非十全十美，上面有很多不平坦的地方（也可以叫瑕疵）。
+这些瑕疵十分恶心，以至于根本不能在上面盖一砖一瓦。
+他希望找到一块最大的正方形无瑕疵土地来盖房子。
+不过，这并不是什么难题，永恒の灵魂在10分钟内就轻松解决了这个问题。
+现在，您也来试试吧。
+</code></pre>
+<h2 id="input">Input</h2>
+<pre><code>输入文件第一行为两个整数n,m（1&lt;=n,m&lt;=1000），接下来n行，每行m个数字，用空格隔开。0表示该块土地有瑕疵，1表示该块土地完好。
+</code></pre>
+<h2 id="output">Output</h2>
+<pre><code>一个整数，最大正方形的边长。
+</code></pre>
+<h2 id="sample-input">Sample Input</h2>
+<pre><code>4 4
+0 1 1 1
+1 1 1 0
+0 1 1 0
+1 1 0 1
+</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<pre><code>2
+</code></pre>
+<hr>
+<p><s>我觉得我应该给自己起个霸气的外号，比如水中贵族，或者淼淼之类的。。。</s></p>
+<p>今天也是水3级题的一天呢！ヾ(◍°∇°◍)ﾉﾞ</p>
+<hr>
+<p>这是一道DP水题。</p>
+<p>题干太二（bushi）长了，简单的概括一下题意：</p>
+<p><strong>给你一个由0和1组成的矩阵，让你在该矩阵中找到一个最大正方形，这个正方形是完全由1组成的，然后输出它的边长。</strong></p>
+<p>接着开始<s>推理</s>分析。</p>
+<hr>
+<h2 id="一状态和定义">一：状态和定义</h2>
+<p><strong>f[i][j]表示以（i,j）为右下角盖房子的最大边长。</strong></p>
+<h2 id="二状态转移">二：状态转移</h2>
+<p><strong>在a[i][j]==1的前提下，f[i][j]=min{f[i-1][j],f[i][j-1],f[i-1][j-1]}。</strong></p>
+<p>为什么<strong>取min</strong>而不是max呢？题目不是要求的是最大边长吗？</p>
+<h3 id="好问题">好问题。</h3>
+<p>did曾经作为一个哲♂学老师教导过我们：</p>
+<pre><code>看你们的 掌握情况 ，就要根据 没有那么听懂的人 来制定下一步的学习计划。这就是哲♂学中所讲的木桶原理。
+
+一个木桶能装多少水取决于最短的那根木板。
+</code></pre>
+<p>所以这个故事告诉我们什么呢？<s>要当憨憨！</s></p>
+<p>当前f[i][j]的值应该取决于<strong>最短的那个木板</strong>，也就是<strong>最小的关联值啦</strong>~</p>
+<p>所以这里会取min呢~</p>
+<h2 id="代码部分细节完善">代码&amp;&amp;部分细节完善</h2>
+<p>由于这里的状态定义并不是最终答案，所以还要定义一个ans来储存最大边长。</p>
+<p><strong>这个时候一定要取max！</strong> 注意取min和max要灵活！！！</p>
+<p>其他的没什么了吧。就是代码啦（代码里面没有太多注释，该说的上面都说啦）：</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+
+#define maxn 1005
+using namespace std;
+
+int a[maxn][maxn];
+int f[maxn][maxn]; 
+
+//这里为了方便使用了一个函数来计算三个数的最小值 
+int MinThree(int a,int b,int c)
+{
+	return min(a,min(b,c));
+}
+
+int main()
+{
+	int n,m;
+	cin&gt;&gt;n&gt;&gt;m; 
+	for(int i=1;i&lt;=n;i++)
+		for(int j=1;j&lt;=m;j++)
+			cin&gt;&gt;a[i][j];
+	int ans=-0x3f3f3f;
+	for(int i=1;i&lt;=n;i++)
+		for(int j=1;j&lt;=m;j++)
+			if(a[i][j]==1)
+			{
+				f[i][j]=MinThree(f[i-1][j],f[i][j-1],f[i-1][j-1])+1;				
+				ans=max(ans,f[i][j]); 
+			}
+	printf(&quot;%d\n&quot;,ans);
+	return 0;
+}
+
+</code></pre>
+<p>撒花~✿✿ヽ(°▽°)ノ✿</p>
+<hr>
+<h6 id="喜欢就点个赞嘛qaq">喜欢就点个赞嘛QAQ</h6>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#description">Description</a></li>
+<li><a href="#input">Input</a></li>
+<li><a href="#output">Output</a></li>
+<li><a href="#sample-input">Sample Input</a></li>
+<li><a href="#sample-output">Sample Output</a></li>
+<li><a href="#%E4%B8%80%E7%8A%B6%E6%80%81%E5%92%8C%E5%AE%9A%E4%B9%89">一：状态和定义</a></li>
+<li><a href="#%E4%BA%8C%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB">二：状态转移</a>
+<ul>
+<li><a href="#%E5%A5%BD%E9%97%AE%E9%A2%98">好问题。</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BB%A3%E7%A0%81%E9%83%A8%E5%88%86%E7%BB%86%E8%8A%82%E5%AE%8C%E5%96%84">代码&amp;&amp;部分细节完善</a><br>
+*<br>
+*<br>
+*<br>
+* <a href="#%E5%96%9C%E6%AC%A2%E5%B0%B1%E7%82%B9%E4%B8%AA%E8%B5%9E%E5%98%9Bqaq">喜欢就点个赞嘛QAQ</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://MrContinue.github.io/post/bsoj1533-zhan-lue-you-xi-1111/">
+              <h3 class="post-title">
+                BSOJ1533 战略游戏1111
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '',
+    clientSecret: '',
+    repo: '',
+    owner: '',
+    admin: [''],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://MrContinue.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
