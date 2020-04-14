@@ -992,5 +992,17 @@ td {
         font-family: -apple-system,BlinkMacSystemFont,'Helvetica Neue','PingFang SC','Hiragino Sans GB','Droid Sans Fallback','Microsoft YaHei',sans-serif;
       }
     
-      body {background-image:url('https://cdn.luogu.com.cn/upload/image_hosting/fvm26q6c.png');} 
+      .main {
+        background: rgba(255,255,255,0.8);
+      }
+    
+      body {
+        background: rgba(255,255,255,0.8);
+      }
+    
+      
+body{ background-image:url('https://cdn.luogu.com.cn/upload/image_hosting/fvm26q6c.png');
+
+    background-size: 100vw 100vh;
+}
     
