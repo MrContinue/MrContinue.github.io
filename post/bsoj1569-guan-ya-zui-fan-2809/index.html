@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>BSOJ1569 关押罪犯2809 | Continue的博客</title>
-<link rel="shortcut icon" href="https://MrContinue.github.io/favicon.ico?v=1586917075836">
+<link rel="shortcut icon" href="https://MrContinue.github.io/favicon.ico?v=1587021823675">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://MrContinue.github.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="BSOJ1569 关押罪犯2809 | Continue的博客 - Atom Feed" href="https://MrContinue.github.io/atom.xml">
@@ -11,11 +11,10 @@
 
 
 
-    <meta name="description" content="
-Description
+    <meta name="description" content="Description
 S城现有两座监狱，一共关押着N名罪犯，编号分别为1~N。他们之间的关系自然也极不和谐。很多罪犯之间甚至积怨已久，如果客观条件具备则随时可能爆发冲突。
-我们用“怨 气值”（一个正整数值）来表示某两名罪犯之间的仇恨程度..." />
-    <meta name="keywords" content="" />
+我们用“怨 气值”（一个正整数值）来表示某两名罪犯之间的仇恨程度，..." />
+    <meta name="keywords" content="题解" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -24,7 +23,7 @@ S城现有两座监狱，一共关押着N名罪犯，编号分别为1~N。他们
       <div class="main-content">
         <div class="site-header">
   <a href="https://MrContinue.github.io">
-  <img class="avatar" src="https://MrContinue.github.io/images/avatar.png?v=1586917075836" alt="">
+  <img class="avatar" src="https://MrContinue.github.io/images/avatar.png?v=1587021823675" alt="">
   </a>
   <h1 class="site-title">
     Continue的博客
@@ -95,12 +94,17 @@ S城现有两座监狱，一共关押着N名罪犯，编号分别为1~N。他们
                 6 min read
               </span>
               
+                <a href="https://MrContinue.github.io/tag/774SQiyrk/" class="post-tag">
+                  # 题解
+                </a>
+              
             </div>
+            
+              <img class="post-feature-image" src="https://MrContinue.github.io/post-images/bsoj1569-guan-ya-zui-fan-2809.jpg" alt="">
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <figure data-type="image" tabindex="1"><img src="https://MrContinue.github.io/post-images/1586600584911.gif" alt="" loading="lazy"></figure>
-<h2 id="description">Description</h2>
+                <h2 id="description">Description</h2>
 <pre><code>S城现有两座监狱，一共关押着N名罪犯，编号分别为1~N。他们之间的关系自然也极不和谐。很多罪犯之间甚至积怨已久，如果客观条件具备则随时可能爆发冲突。
 我们用“怨 气值”（一个正整数值）来表示某两名罪犯之间的仇恨程度，怨气值越大，则这两名罪犯之间的积怨越多。
 如果两名怨气值为 c 的罪犯被关押在同一监狱，他们俩之间会发生摩擦，并造成影响力为c的冲突事件。
@@ -135,7 +139,7 @@ S城现有两座监狱，一共关押着N名罪犯，编号分别为1~N。他们
 罪犯之间的怨气值如下面左图所示，右图所示为罪犯的分配方法，市长看到的冲突事件 影响力是3512（由2号和3号罪犯引发）。
 其他任何分法都不会比这个分法更优。
 </code></pre>
-<figure data-type="image" tabindex="2"><img src="https://s2.ax1x.com/2020/03/01/3cln8e.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://s2.ax1x.com/2020/03/01/3cln8e.png" alt="" loading="lazy"></figure>
 <pre><code>【数据范围】
 对于30%的数据有N≤15。
 对于70%的数据有N≤2000，M≤50000。
