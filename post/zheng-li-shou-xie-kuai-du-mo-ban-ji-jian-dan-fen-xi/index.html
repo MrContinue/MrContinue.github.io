@@ -2,20 +2,24 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>BSOJ1533 战略游戏1111 | Continue的博客</title>
+<title>【整理】手写快读模板及简单分析 | Continue的博客</title>
 <link rel="shortcut icon" href="https://MrContinue.github.io/favicon.ico?v=1587134228415">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://MrContinue.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="BSOJ1533 战略游戏1111 | Continue的博客 - Atom Feed" href="https://MrContinue.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="【整理】手写快读模板及简单分析 | Continue的博客 - Atom Feed" href="https://MrContinue.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="Description
-Bob喜欢玩电脑游戏，特别是战略游戏。但是他经常无法找到快速玩过游戏的办法。现在他有个问题。
-他要建立一个古城堡，城堡中的路形成一棵树。
-他要在这棵树的结点上放置最少数目的士兵，使得这些士兵能了望到所有的路。注意，某..." />
-    <meta name="keywords" content="题解" />
+    <meta name="description" content="阅前必读
+这篇小短文仍然是纯手写的自己的想法，有什么不对、不好的地方非常欢迎各位大佬指正qwq！
+
+我们为什么要学习手写快读？
+
+平常读入速度快，写起来比较简单。
+在某些特定环境可以不用考虑输入的困难，因为快读只考虑数字
+可以瞬间提升代码的..." />
+    <meta name="keywords" content="知识点汇总" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -85,158 +89,113 @@ Bob喜欢玩电脑游戏，特别是战略游戏。但是他经常无法找到�
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              BSOJ1533 战略游戏1111
+              【整理】手写快读模板及简单分析
             </h2>
             <div class="post-info">
               <span>
-                2020-04-11
+                2020-04-17
               </span>
               <span>
-                4 min read
+                3 min read
               </span>
               
-                <a href="https://MrContinue.github.io/tag/774SQiyrk/" class="post-tag">
-                  # 题解
+                <a href="https://MrContinue.github.io/tag/9wIK6lfsm/" class="post-tag">
+                  # 知识点汇总
                 </a>
               
             </div>
             
-              <img class="post-feature-image" src="https://MrContinue.github.io/post-images/bsoj1533-zhan-lue-you-xi-1111.jpg" alt="">
+              <img class="post-feature-image" src="https://MrContinue.github.io/post-images/zheng-li-shou-xie-kuai-du-mo-ban-ji-jian-dan-fen-xi.jpg" alt="">
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <h2 id="description">Description</h2>
-<pre><code>Bob喜欢玩电脑游戏，特别是战略游戏。但是他经常无法找到快速玩过游戏的办法。现在他有个问题。
-他要建立一个古城堡，城堡中的路形成一棵树。
-他要在这棵树的结点上放置最少数目的士兵，使得这些士兵能了望到所有的路。注意，某个士兵在一个结点上时，与该结点相连的所有边将都可以被了望到。
-请你编一程序，给定一树，帮Bob计算出他需要放置最少的士兵。
-</code></pre>
-<h2 id="input">Input</h2>
-<pre><code>输入文件中数据表示一棵树，描述如下：
-第一行 N，表示树中结点的数目。
-第二行至第N+1行，每行描述每个结点信息，依次为：该结点标号i，k(后面有k条边与结点I相连)，接下来k个数，分别是每条边的另一个结点标号r1，r2，...，rk。
-对于一个n(0 &lt; n &lt;= 1500)个结点的树，结点标号在0到n-1之间，在输入文件中每条边只出现一次。
-</code></pre>
-<h2 id="output">Output</h2>
-<pre><code>输出文件仅包含一个数，为所求的最少的士兵数目。
-</code></pre>
-<h2 id="sample-input">Sample Input</h2>
-<pre><code>4
-0 1 1
-1 2 2 3
-2 0
-3 0
-</code></pre>
-<h2 id="sample-output">Sample Output</h2>
-<pre><code>1
-</code></pre>
+                <h2 id="阅前必读">阅前必读</h2>
+<p>这篇小短文仍然是纯手写的自己的想法，有什么不对、不好的地方非常欢迎各位大佬指正qwq！</p>
 <hr>
-<p>**树形DP！**直切思路！</p>
-<hr>
-<h2 id="一状态和表示">一：状态和表示</h2>
-<p>设f[i][1]表示i点放士兵时，以i为根的子树需要的 最少士兵数目。</p>
-<p>f[i][0]表示i点不放士兵时，以i为根的子树需要的最少士兵数目。</p>
-<h2 id="二状态转移">二：状态转移</h2>
-<p>当点i不放时，则它的所有儿子都必须放，即f[i][0]+=f[j][1]。其中j为i的儿子。</p>
-<p>当点i放时，则它的所有儿子放与不放无所谓，但应该取两种情况的最小值。即 f[i][1]+=min(f[j][1],f[j][0])。</p>
-<p>其中j为i的儿子。 初始条件：<strong>f[i][0]=0;f[i][1]=1。</strong></p>
-<h2 id="代码细节完善">代码&amp;&amp;细节完善</h2>
-<p>注意的点如下：</p>
+<h2 id="我们为什么要学习手写快读">我们为什么要学习手写快读？</h2>
 <ul>
-<li>
-<p>平常就要注意的是结构体数组一定要<strong>开两倍！！</strong></p>
-</li>
-<li>
-<p>平常也要注意像本题这种无向的话<strong>连边连2次</strong></p>
-</li>
-<li>
-<p>这里Dfs是从（0，-1）开始的</p>
-</li>
-<li>
-<p>是取的min值，注意读题</p>
-</li>
+<li>平常读入速度快，写起来比较简单。</li>
+<li><strong>在某些特定环境可以不用考虑输入的困难，因为快读只考虑数字</strong></li>
+<li>可以瞬间提升代码的B格（大雾）<br>
+当然，如果宁并不想敲快读的代码，scanf也是一个不错的选择<br>
+（没有冒犯cin的意思，虽然它用起来比较方便，但是它实在是太慢了，一般数据稍微大一点就不要用cin了，容易超时）</li>
 </ul>
-<p>上代码！</p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-
-#define maxn 1505
-using namespace std;
-
-struct node
+<hr>
+<h2 id="快读的原理及基本过程">快读的原理及基本过程</h2>
+<p>快读利用的是C++的getchar()进行读入，也就是说，<strong>输入的每个数字或者字母，都将被当做一个“符号”处理。</strong><br>
+接着，快读函数将根据符号和数字进行分类处理，最后返回实际读入的值。</p>
+<p>我们一般在快读函数里<strong>只处理数字</strong>，这样在快速读入的情况下可以避免一些奇怪输入的困扰。</p>
+<hr>
+<h2 id="快读代码模板">快读代码模板</h2>
+<p>纯代码版：</p>
+<pre><code> inline int Read()
 {
-	int to,next;
-}a[maxn&lt;&lt;1];
-
-int f[maxn][2];
-int head[maxn];
-int cnt;
-int num[maxn];
-
-void AddEdge(int x,int y)
-{
-	a[++cnt].next=head[x];
-	a[cnt].to=y;
-	head[x]=cnt;
-}
-
-void Dfs(int x,int prt)
-{
-	f[x][1]=1;
-	for(int i=head[x];i;i=a[i].next)
+	int s=0;
+	int f=1;
+	char ch=getchar();
+	while(ch&lt;'0'||ch&gt;'9')
 	{
-		int y=a[i].to;
-		if(y==prt) continue;
-		Dfs(y,x);
-		f[x][0]+=f[y][1];
-		f[x][1]+=min(f[y][0],f[y][1]);
+		if(ch=='-')
+			f=-1;
+		ch=getchar();
 	}
-}
-
-int main()
-{
-	int n;
-	cin&gt;&gt;n;
-    for(int i=1;i&lt;=n;i++)
+	while(ch&gt;='0'&amp;&amp;ch&lt;='9')
 	{
-		int x;
-        cin&gt;&gt;x;
-        cin&gt;&gt;num[x];
-        for(int j=1;j&lt;=num[x];j++)
-		{
-			int y;
-            cin&gt;&gt;y;
-            AddEdge(x,y);
-            AddEdge(y,x);
-        }
-    }
-    Dfs(0,-1);
-    int ans=min(f[0][0],f[0][1]);
-    cout&lt;&lt;ans&lt;&lt;endl;
-	return 0;
+		s=(s&lt;&lt;1)+(s&lt;&lt;3)+ch-'0';
+		ch=getchar();
+	}
+	return s*f;
 }
-
+</code></pre>
+<p>注释解析版：</p>
+<pre><code>inline int Read()
+{
+	int s=0; //存数值
+	int f=1; //存符号
+	char ch=getchar(); //当前读取的字符
+	while(ch&lt;'0'||ch&gt;'9') //如果当前读入的字符不是数字
+	{
+		if(ch=='-') //如果是负号
+			f=-1; //则标记这个数为负
+		ch=getchar(); //并且继续读取下一个字符
+	}
+	while(ch&gt;='0'&amp;&amp;ch&lt;='9') //如果当前读入的字符是数字
+	{
+		s=(s&lt;&lt;1)+(s&lt;&lt;3)+ch-'0'; //则将值累加到存数值的变量s里面
+		ch=getchar(); //并且继续读取下一个字符
+	}
+	return s*f; //如果t在判断负数时被标记成了-1，那么这个时候数值s与t相乘，直接变为负值
+}
 </code></pre>
 <hr>
-<h6 id="写题解不易-求点赞qaq">写题解不易 求点赞QAQ</h6>
+<h2 id="一些小问题">一些小问题</h2>
+<ol>
+<li>
+<p>Q：在累加值的时候<code>s=(s&lt;&lt;1)+(s&lt;&lt;3)+ch-'0'</code>中的<code>(s&lt;&lt;1)+(s&lt;&lt;3)</code>是什么意思呢？<br>
+A：<code>(s&lt;&lt;1)+(s&lt;&lt;3)</code>就是和<code>s*10</code>一个效果啦，只是在这里运用了快一点的位运算。当然，直接写<code>s*10</code>也不会有什么问题啦qwq</p>
+</li>
+<li>
+<p>Q：为什么不介绍快速输出呢？<br>
+A：因为快速输出没有什么特别的需要啊，平常用printf它不香嘛qwq</p>
+</li>
+</ol>
+<hr>
+<h3 id="感谢您的观看呀qwq">感谢您的观看呀qwq</h3>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#description">Description</a></li>
-<li><a href="#input">Input</a></li>
-<li><a href="#output">Output</a></li>
-<li><a href="#sample-input">Sample Input</a></li>
-<li><a href="#sample-output">Sample Output</a></li>
-<li><a href="#%E4%B8%80%E7%8A%B6%E6%80%81%E5%92%8C%E8%A1%A8%E7%A4%BA">一：状态和表示</a></li>
-<li><a href="#%E4%BA%8C%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB">二：状态转移</a></li>
-<li><a href="#%E4%BB%A3%E7%A0%81%E7%BB%86%E8%8A%82%E5%AE%8C%E5%96%84">代码&amp;&amp;细节完善</a><br>
-*<br>
-*<br>
-*<br>
-* <a href="#%E5%86%99%E9%A2%98%E8%A7%A3%E4%B8%8D%E6%98%93-%E6%B1%82%E7%82%B9%E8%B5%9Eqaq">写题解不易 求点赞QAQ</a></li>
+<li><a href="#%E9%98%85%E5%89%8D%E5%BF%85%E8%AF%BB">阅前必读</a></li>
+<li><a href="#%E6%88%91%E4%BB%AC%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AD%A6%E4%B9%A0%E6%89%8B%E5%86%99%E5%BF%AB%E8%AF%BB">我们为什么要学习手写快读？</a></li>
+<li><a href="#%E5%BF%AB%E8%AF%BB%E7%9A%84%E5%8E%9F%E7%90%86%E5%8F%8A%E5%9F%BA%E6%9C%AC%E8%BF%87%E7%A8%8B">快读的原理及基本过程</a></li>
+<li><a href="#%E5%BF%AB%E8%AF%BB%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF">快读代码模板</a></li>
+<li><a href="#%E4%B8%80%E4%BA%9B%E5%B0%8F%E9%97%AE%E9%A2%98">一些小问题</a>
+<ul>
+<li><a href="#%E6%84%9F%E8%B0%A2%E6%82%A8%E7%9A%84%E8%A7%82%E7%9C%8B%E5%91%80qwq">感谢您的观看呀qwq</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -249,9 +208,9 @@ int main()
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://MrContinue.github.io/post/bsoj1569-guan-ya-zui-fan-2809/">
+            <a href="https://MrContinue.github.io/post/dong-man-dan-wan-lun-po-po-zhi-ci-dou/">
               <h3 class="post-title">
-                BSOJ1569 关押罪犯2809
+                【动漫】弹丸论破——狛枝凪斗
               </h3>
             </a>
           </div>

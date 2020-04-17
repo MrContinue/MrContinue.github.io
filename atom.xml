@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MrContinue.github.io</id>
     <title>Continue的博客</title>
-    <updated>2020-04-17T07:04:51.596Z</updated>
+    <updated>2020-04-17T14:37:21.747Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MrContinue.github.io"/>
     <link rel="self" href="https://MrContinue.github.io/atom.xml"/>
@@ -10,6 +10,86 @@
     <logo>https://MrContinue.github.io/images/avatar.png</logo>
     <icon>https://MrContinue.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Continue的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[【整理】手写快读模板及简单分析]]></title>
+        <id>https://MrContinue.github.io/post/zheng-li-shou-xie-kuai-du-mo-ban-ji-jian-dan-fen-xi/</id>
+        <link href="https://MrContinue.github.io/post/zheng-li-shou-xie-kuai-du-mo-ban-ji-jian-dan-fen-xi/">
+        </link>
+        <updated>2020-04-17T11:43:37.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="阅前必读">阅前必读</h2>
+<p>这篇小短文仍然是纯手写的自己的想法，有什么不对、不好的地方非常欢迎各位大佬指正qwq！</p>
+<hr>
+<h2 id="我们为什么要学习手写快读">我们为什么要学习手写快读？</h2>
+<ul>
+<li>平常读入速度快，写起来比较简单。</li>
+<li><strong>在某些特定环境可以不用考虑输入的困难，因为快读只考虑数字</strong></li>
+<li>可以瞬间提升代码的B格（大雾）<br>
+当然，如果宁并不想敲快读的代码，scanf也是一个不错的选择<br>
+（没有冒犯cin的意思，虽然它用起来比较方便，但是它实在是太慢了，一般数据稍微大一点就不要用cin了，容易超时）</li>
+</ul>
+<hr>
+<h2 id="快读的原理及基本过程">快读的原理及基本过程</h2>
+<p>快读利用的是C++的getchar()进行读入，也就是说，<strong>输入的每个数字或者字母，都将被当做一个“符号”处理。</strong><br>
+接着，快读函数将根据符号和数字进行分类处理，最后返回实际读入的值。</p>
+<p>我们一般在快读函数里<strong>只处理数字</strong>，这样在快速读入的情况下可以避免一些奇怪输入的困扰。</p>
+<hr>
+<h2 id="快读代码模板">快读代码模板</h2>
+<p>纯代码版：</p>
+<pre><code> inline int Read()
+{
+	int s=0;
+	int f=1;
+	char ch=getchar();
+	while(ch&lt;'0'||ch&gt;'9')
+	{
+		if(ch=='-')
+			f=-1;
+		ch=getchar();
+	}
+	while(ch&gt;='0'&amp;&amp;ch&lt;='9')
+	{
+		s=(s&lt;&lt;1)+(s&lt;&lt;3)+ch-'0';
+		ch=getchar();
+	}
+	return s*f;
+}
+</code></pre>
+<p>注释解析版：</p>
+<pre><code>inline int Read()
+{
+	int s=0; //存数值
+	int f=1; //存符号
+	char ch=getchar(); //当前读取的字符
+	while(ch&lt;'0'||ch&gt;'9') //如果当前读入的字符不是数字
+	{
+		if(ch=='-') //如果是负号
+			f=-1; //则标记这个数为负
+		ch=getchar(); //并且继续读取下一个字符
+	}
+	while(ch&gt;='0'&amp;&amp;ch&lt;='9') //如果当前读入的字符是数字
+	{
+		s=(s&lt;&lt;1)+(s&lt;&lt;3)+ch-'0'; //则将值累加到存数值的变量s里面
+		ch=getchar(); //并且继续读取下一个字符
+	}
+	return s*f; //如果t在判断负数时被标记成了-1，那么这个时候数值s与t相乘，直接变为负值
+}
+</code></pre>
+<hr>
+<h2 id="一些小问题">一些小问题</h2>
+<ol>
+<li>
+<p>Q：在累加值的时候<code>s=(s&lt;&lt;1)+(s&lt;&lt;3)+ch-'0'</code>中的<code>(s&lt;&lt;1)+(s&lt;&lt;3)</code>是什么意思呢？<br>
+A：<code>(s&lt;&lt;1)+(s&lt;&lt;3)</code>就是和<code>s*10</code>一个效果啦，只是在这里运用了快一点的位运算。当然，直接写<code>s*10</code>也不会有什么问题啦qwq</p>
+</li>
+<li>
+<p>Q：为什么不介绍快速输出呢？<br>
+A：因为快速输出没有什么特别的需要啊，平常用printf它不香嘛qwq</p>
+</li>
+</ol>
+<hr>
+<h3 id="感谢您的观看呀qwq">感谢您的观看呀qwq</h3>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[【动漫】弹丸论破——狛枝凪斗]]></title>
         <id>https://MrContinue.github.io/post/dong-man-dan-wan-lun-po-po-zhi-ci-dou/</id>
@@ -1112,648 +1192,6 @@ int main()
 }
 </code></pre>
 <p>撒花~✿✿ヽ(°▽°)ノ✿</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[【整理】DP模板题及知识点汇讲]]></title>
-        <id>https://MrContinue.github.io/post/zheng-li-dp-mo-ban-ti-ji-zhi-shi-dian-hui-jiang/</id>
-        <link href="https://MrContinue.github.io/post/zheng-li-dp-mo-ban-ti-ji-zhi-shi-dian-hui-jiang/">
-        </link>
-        <updated>2020-04-11T09:41:05.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="特别特别感谢">特别特别感谢：</h2>
-<h3 id="lmpp"><a href="https://www.luogu.com.cn/user/160839">lmpp</a>大佬<strong>牺牲自己宝贵时间，为我没有脾气的耐心讲解。</strong></h3>
-<h3 id="lmpp大佬的博客"><a href="https://www.luogu.com.cn/blog/160839/">lmpp大佬的博客</a>：墙裂建议进去康一康！</h3>
-<h4 id="还有gmq-gbf同学感谢你们的鼓励与支持">还有gmq、gbf同学，感谢你们的鼓励与支持！！</h4>
-<h4 id="did教给我知识真是太强了">did教给我知识真是太强了！！</h4>
-<p>没有他们就没有这篇博客，我也会比现在蒻上<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mi>n</mi><mi>f</mi></mrow><annotation encoding="application/x-tex">inf</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span></span></span></span>倍。</p>
-<hr>
-<h3 id="提示">提示：</h3>
-<p>本博客公开， <strong>但“例题部分”仅记录的是本人认为较有意义添加的题或者是本人的知识盲区。</strong> 我会以<strong>知识点为经，算法为纬</strong>，在知识点开头加入模板题并附有代码，有的时候会写一点小提示，即<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span>。</p>
-<p>在我自己掌握特别不好的题目/知识点旁会加以<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="Red"><menclose mathbackground="Yellow"><mtext>！</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\color{Red}\colorbox{Yellow}{！}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2833299999999999em;vertical-align:-0.3em;"></span><span class="mord" style="color:Red;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9833299999999998em;"><span style="top:-2.98333em;"><span class="pstrut" style="height:3.28333em;"></span><span class="stretchy colorbox" style="color:Red;height:1.2833299999999999em;background-color:Yellow;"></span></span><span style="top:-3.28333em;"><span class="pstrut" style="height:3.28333em;"></span><span class="mord boxpad" style="color:Red;"><span class="mord cjk_fallback" style="color:Red;">！</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3em;"><span></span></span></span></span></span></span></span></span> 的标记。</p>
-<p><strong>所有题号以BSOJ为准。</strong></p>
-<p>有什么错误纰漏的直接QQ+洛谷私信+讨论区留言，我真的超级需要您的反馈的qwq。</p>
-<p>希望能您能从这份清单中找到您的一些知识漏洞并把他们补起来！</p>
-<hr>
-<h3 id="更新信息">更新信息</h3>
-<p>2020.3.13 <strong>1.0版本</strong>，知识点记录至区间DP模板题</p>
-<p>2020.3.16 <strong>1.1版本</strong>，知识点记录至树形DP模板题，添加了<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span>的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext>LaTeX</mtext></mrow><annotation encoding="application/x-tex">\LaTeX</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.89883em;vertical-align:-0.2155em;"></span><span class="mord text"><span class="mord textrm">L</span><span class="mspace" style="margin-right:-0.36em;"></span><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.68333em;"><span style="top:-2.904999em;"><span class="pstrut" style="height:2.7em;"></span><span class="mord text"><span class="mord textrm sizing reset-size6 size3">A</span></span></span></span></span></span><span class="mspace" style="margin-right:-0.15em;"></span><span class="mord text"><span class="mord textrm">T</span><span class="mspace" style="margin-right:-0.1667em;"></span><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.46782999999999997em;"><span style="top:-2.7845em;"><span class="pstrut" style="height:3em;"></span><span class="mord text"><span class="mord textrm">E</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2155em;"><span></span></span></span></span><span class="mspace" style="margin-right:-0.125em;"></span><span class="mord textrm">X</span></span></span></span></span></span>效果，优化了部分知识点的注释</p>
-<p>2020.3.24 <strong>1.2版本</strong>，知识点记录至树形DP模板题，优化了部分知识点的注释。同时，在<strong>lmpp大佬</strong>的指导下，想起来了一些遗忘的知识点并作了一些添加。感谢！</p>
-<p>2020.3.25 <strong>1.3版本</strong>，知识点记录至部分和问题，优化了部分知识点的注释及tips</p>
-<p>2020.3.28 <strong>1.4版本，为了使每个知识点的理解更加深入，也为了使记录更佳方便，本博客主要记录内容改为“DP模板题及部分例题汇总”。</strong> 添加了树形DP模板题“树的重心”，优化了部分知识点的注释及tips</p>
-<p>2020.3.19 <strong>1.45版本</strong>，主要是优化了博客的强调、标题等，优化了阅读感官效果，优化了部分知识点的注释及tips</p>
-<hr>
-<h2 id="模板题">模板题</h2>
-<hr>
-<h3 id="坐标dp">坐标DP：</h3>
-<p><a href="https://oj.bashu.com.cn/pub/problempage.php?problem_id=1346">1346 数字金字塔</a></p>
-<pre><code>//这份代码采用的是从上至下统计然后用ans储存最终最大值的方法
-//顺推法
-#include &lt;iostream&gt;
-#include &lt;cmath&gt;
-
-#define maxn 1005
-using namespace std;
-
-int a[maxn][maxn];
-int f[maxn][maxn];
-//f[i][j]表示位置为(i,j)的点的最大值
-
-int main()
-{
-	int n;
-	cin&gt;&gt;n;
-	for(int i=1;i&lt;=n;i++)
-		for(int j=1;j&lt;=i;j++)
-			cin&gt;&gt;a[i][j];
-	f[1][1]=a[1][1];
-	for(int i=1;i&lt;=n;i++)
-		for(int j=1;j&lt;=i;j++)
-		{
-        	//对于一个值的来源有两种：
-            //1.上一状态留下的最优值
-            //2.当前最优值
-            //所以我们只需要把两种状态的值相比较，得出最优值更新即可
-			f[i+1][j]=max(f[i+1][j],f[i][j]+a[i+1][j]);
-			f[i+1][j+1]=max(f[i+1][j+1],f[i][j]+a[i+1][j+1]);
-		}
-    //由于顺推法是将答案统一统计到最底层，所以在择取最优解时还需要再遍历一遍最底层求最优值
-	int ans=-0x7ffffff;
-	for(int i=1;i&lt;=n;i++)
-		if(ans&lt;f[n][i]) ans=f[n][i];
-	cout&lt;&lt;ans&lt;&lt;endl;
-	return 0;
-}
-</code></pre>
-<hr>
-<h3 id="线型dp">线型DP：</h3>
-<p>LCS：<a href="https://oj.bashu.com.cn/pub/problempage.php?problem_id=1353">1353 最长公共子序列</a></p>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
-<p><strong>子序列</strong>与<strong>子串</strong>的区别</p>
-<p>最长公共<strong>子串</strong>（Longest Common Substirng）和最长公共<strong>子序列</strong>（Longest Common Subsequence，<strong>LCS</strong>）的区别为：子串是串的一个连续的部分，子序列则是从不改变序列的顺序，而从序列中去掉任意的元素而获得新的序列；也就是说，<strong>子串中字符的位置必须是连续的，子序列则可以不必连续。</strong></p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-
-#define maxn 205
-using namespace std;
-
-string a,b;
-int f[maxn][maxn];
-//f[i][j]表示固定S1的第i项时与j的匹配情况
-
-int main()
-{
-	cin&gt;&gt;a&gt;&gt;b;
-	a=' '+a; b=' '+b;  //为了循环时从1开始比较方便，可以加一个' '
-	for(int i=1;i&lt;a.length();i++)
-		for(int j=1;j&lt;b.length();j++)
-        	//如果当前字母能匹配上，则将上一阶段最长公共子序列的长度+1
-			if(a[i]==b[j])
-				f[i][j]=f[i-1][j-1]+1;
-            //如果匹配不上，既无法添加到上一阶段最长公共子序列，直接将上一阶段中的最大值赋值
-			else
-				f[i][j]=max(f[i-1][j],f[i][j-1]);
-	cout&lt;&lt;f[a.length()-1][b.length()-1]&lt;&lt;endl;
-	return 0;
-}
-
-</code></pre>
-<p>LIS：<a href="https://oj.bashu.com.cn/pub/problempage.php?problem_id=1355">1355 最长上升子序列</a></p>
-<pre><code>#include &lt;iostream&gt;
-
-#define maxn 1005
-using namespace std;
-
-int a[maxn];
-int f[maxn]; 
-//f[i]表示以a[i]结尾的最长上升子序列的最大长度
-
-int main()
-{
-	int n;
-	cin&gt;&gt;n;
-	for(int i=1;i&lt;=n;i++)
-	{
-		cin&gt;&gt;a[i];
-		f[i]=1;
-	}
-	for(int i=1;i&lt;=n;i++)
-		for(int j=1;j&lt;i;j++)
-        	//首先判断是否满足【上升】条件
-			if(a[i]&gt;a[j])
-            //再判断是否【最长】，取最大长度值
-            	f[i]=max(f[i],f[j]+1);
-    //由于f数组的设计是【以a[i]结尾的】最长上升子序列的最大长度
-    //所以我们并不能直接知道最终的答案，还要再遍历比较一下
-	int ans=-0x3f3f3f;
-	for(int i=1;i&lt;=n;i++)
-		ans=max(ans,f[i]);
-	cout&lt;&lt;ans&lt;&lt;endl;
-	return 0;
-}
-</code></pre>
-<hr>
-<h3 id="背包">背包：</h3>
-<p><a href="https://oj.bashu.com.cn/pub/problempage.php?problem_id=1364">1364 01背包问题</a></p>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
-<p><strong>1. 01背包题意概括</strong></p>
-<p>假定背包的最大容量为W，N件物品，每件物品都有自己的价值和重量，将物品<br>
-放入背包中使得背包内物品的总价值最大。</p>
-<p><strong>2. 01背包为什么叫01背包</strong></p>
-<p>由于在该问题中，一个物品只有【放】与【不放】两种状态，刚好对应【0】与【1】的真假状态。由此得名01背包。</p>
-<pre><code>//本代码是做过滚动数组优化的代码
-//从二维优化到了一维
-
-#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-
-#define maxn 205
-using namespace std;
-
-int f[maxn];
-//f[i]表示背包容量为i时背包内物品价值的最大值
-int v[maxn],c[maxn];
-//v[i]表示第i件物品所需容量，c[i]表示第i件物品的价值
-
-int main()
-{
-	int w,n;
-	scanf(&quot;%d %d&quot;,&amp;w,&amp;n);
-	for(int i=1;i&lt;=n;i++)
-		scanf(&quot;%d %d&quot;,&amp;v[i],&amp;c[i]);
-	for(int i=1;i&lt;=n;i++)
-		for(int j=w;j&gt;=v[i];j--)
-        //这里的第二重循环做过优化
-        //w为总容量，由于我们在下面计算时需要用到【j-v[i]】，为了不出现数组越界，也为了增强效率，所以设置边界为【j&gt;=v[i]】
-        //由于这里进行了压缩，为了不干扰到正常计算，所以使用倒序进行覆盖
-			f[j]=max(f[j],f[j-v[i]]+c[i]);
-            //尝试将该物品放入背包后的价值是否能大于上一状态遍历结果
-	printf(&quot;%d\n&quot;,f[w]);
-    //由于状态的定义，这里直接输出
-	return 0;
-}
-</code></pre>
-<p><a href="https://oj.bashu.com.cn/pub/problempage.php?problem_id=1365">1365 完全背包</a></p>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
-<p><strong>完全背包</strong></p>
-<p>这个问题非常类似于01背包问题，所不同的是每种物品有无限件。也就是从每种物品的角度考虑，与它相关的策略已并非取或不取两种，而是有取0件、取1件、取2件……等很多种。</p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-
-#define maxn 1005
-using namespace std;
-
-int f[maxn];
-//f[i]表示占用资源为i时的最大价值
-int v[maxn],c[maxn];
-//v[i]表示第i件物品所需容量，c[i]表示第i件物品的价值
-
-int main()
-{
-	int w,n;
-	scanf(&quot;%d %d&quot;,&amp;w,&amp;n);
-	for(int i=1;i&lt;=n;i++)
-		scanf(&quot;%d %d&quot;,&amp;v[i],&amp;c[i]);
-	for(int i=1;i&lt;=n;i++)
-		for(int j=v[i];j&lt;=w;j++)
-        //由于无限物品，我们刚好可以利用滚动数组上一次循环的数据进行操作而不会受到限制，所以直接循环即可
-			f[j]=max(f[j],f[j-v[i]]+c[i]);
-	printf(&quot;max=%d\n&quot;,f[w]);
-	return 0;
-}
-</code></pre>
-<p><a href="https://oj.bashu.com.cn/pub/problempage.php?problem_id=1515">1515 无限硬币问题</a></p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-
-#define maxn 10010
-using namespace std;
-
-int a[maxn];
-int f[maxn];  //f[i]表示组成i元所需的最少硬币数
-
-int main()
-{
-	int n,m;
-	scanf(&quot;%d %d&quot;,&amp;n,&amp;m);   //如题义
-	for(int i=1;i&lt;=n;i++)
-		scanf(&quot;%d&quot;,&amp;a[i]);
-	for(int i=0;i&lt;=m;i++)  //先枚举1~m的钱数
-		for(int j=1;j&lt;=n;j++) //再枚举硬币数量
-			if(i&gt;=a[j])  //必须要能【组成】i元钱
-			//【组成】这个概念比较模糊 为您详细解释一下
-			//这里的意思就是不能让该硬币的价值大于我们要求的价值
-			//要让硬币组成价值
-			{
-				if(f[i]==0)  //如果之前没有统计过f[i]
-				    f[i]=f[i-a[j]]+1;  //则f[i]为f[i-a[j]]+1
-				//这里稍微解释一下为什么这么做
-				//因为还没有本阶段的值，所以就选取上一阶段的值+1
-				else f[i]=min(f[i],f[i-a[j]]+1);  //如果有统计过 则择取最小数		
-			}
-	for(int i=1;i&lt;=m;i++)
-		printf(&quot;%d\n&quot;,f[i]); 
-	return 0;
-}
-</code></pre>
-<p><a href="https://oj.bashu.com.cn/pub/problempage.php?problem_id=1517">1517 有限硬币问题</a></p>
-<pre><code>#include &lt;iostream&gt;
-
-#define maxn 10005
-using namespace std;
-
-int f[maxn];  //f[i]表示组成i元所需的最少硬币数
-int a[maxn],b[maxn];
-
-int main()
-{
-	int m,n;
-	cin&gt;&gt;n&gt;&gt;m; //如题义
-	for(int i=1;i&lt;=n;i++)
-		cin&gt;&gt;a[i];
-	for(int i=1;i&lt;=n;i++)
-		cin&gt;&gt;b[i];
-	for(int i=1;i&lt;=m;i++)
-		f[i]=0x3f3f3f; //这里要初始化为最大值
-	//因为f[i]到时候会进行min操作 所以应该从最大开始
-	//至于为什么1515不用初始化为最大 因为我们进行了一次判断操作 即if(f[i]==0)
-	//因为【有限】的特殊性，我们不能直接if 所以这里需要初始化
-	f[0]=0; //凑成0元是不需要硬币的 所以=0
-	for(int i=1;i&lt;=n;i++)  //先枚举第i种硬币
-		for(int k=1;k&lt;=b[i];k++)  //再枚举使用第i种硬币k枚
-			for(int j=m;j&gt;=k*a[i];j--) //对产生的价值j优化
-			//这里对第三重循环做一点点讲解
-			//m代表目标价值，k*a[i]代表k枚a[i]价值的硬币总价值
-			//之所以比1515多出来这个循环也是因为【有限】的特殊性
-				f[j]=min(f[j],f[j-k*a[i]]+k);
-				//这里就是比较凑成j元所需的最小硬币数
-	for(int i=1;i&lt;=m;i++)
-		if(f[i]==0x3f3f3f)  //如果凑不成i元 则输出-1
-			cout&lt;&lt;-1&lt;&lt;endl;
-		else  //输出凑成i元的最少硬币数
-			cout&lt;&lt;f[i]&lt;&lt;endl;
-	return 0;
-}
-</code></pre>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
-<p>对于如何从<strong>无限硬币问题</strong>转换成<strong>有限硬币问题</strong>，之前与一位大佬进行了探讨，汇总如下，仅个人意见：</p>
-<pre><code>……（前面的讨论主要是搭配代码进行了理解，可以直接看代码及注释）
-
-窝看了下，这两者基本上就两处不同：
-1. 1517要初始化 1515则不用
-2. 1517多了一重优化循环
-</code></pre>
-<hr>
-<h3 id="colorredcolorboxyellow-区间dp"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="Red"><menclose mathbackground="Yellow"><mtext>！</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\color{Red}\colorbox{Yellow}{！}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2833299999999999em;vertical-align:-0.3em;"></span><span class="mord" style="color:Red;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9833299999999998em;"><span style="top:-2.98333em;"><span class="pstrut" style="height:3.28333em;"></span><span class="stretchy colorbox" style="color:Red;height:1.2833299999999999em;background-color:Yellow;"></span></span><span style="top:-3.28333em;"><span class="pstrut" style="height:3.28333em;"></span><span class="mord boxpad" style="color:Red;"><span class="mord cjk_fallback" style="color:Red;">！</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3em;"><span></span></span></span></span></span></span></span></span> 区间DP：</h3>
-<p><a href="https://oj.bashu.com.cn/pub/problempage.php?problem_id=1510">1510 最小最大代价子母树</a></p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-
-#define maxn 105
-using namespace std;
-
-int a[maxn]; //原数组 
-int f[maxn]; //前缀和数组 
-int maxx[maxn][maxn],minn[maxn][maxn]; //最大最小数组 
-//maxx[i][j]表示从第i堆石子到第j堆石子合并为一堆石子的最大代价（即最大子母树）
-//minn[i][j]表示从第i堆石子到第j堆石子合并为一堆石子的最小代价（即最小子母树）
-
-int main()
-{
-	int n;
-	scanf(&quot;%d&quot;,&amp;n);
-	for(int i=1;i&lt;=n;i++)
-		scanf(&quot;%d&quot;,&amp;a[i]);
-    //求前缀和，日常清空数组初始化
-	for(int i=1;i&lt;=n;i++)
-	{
-		f[i]=f[i-1]+a[i];
-		maxx[i][i]=0;
-		minn[i][i]=0;
-	}
-	for(int x=1;x&lt;n;x++) //合并阶段
-		for(int i=1;i&lt;=n-x;i++) //起点
-		{
-			int j=i+x; //当下起点的终点
-			maxx[i][j]=-0x3f3f3f; //初始化
-			minn[i][j]=0x3f3f3f;
-			for(int z=i;z&lt;j;z++) //状态转移，求f[i][j]的最优值
-			{
-				maxx[i][j]=max(maxx[i][j],maxx[i][z]+maxx[z+1][j]);
-				minn[i][j]=min(minn[i][j],minn[i][z]+minn[z+1][j]);
-			}
-            //累加当前合并需要的的代价
-            //f[j]-f[i-1]表示f[i-1]~f[j]区间的和
-			maxx[i][j]=maxx[i][j]+f[j]-f[i-1];
-			minn[i][j]=minn[i][j]+f[j]-f[i-1];
-		}
-    //由于我们设计的数组，所以这里直接输出
-    //minn[1][n]表示从第1堆石子到第n堆石子合并为一堆石子的最小代价（即最小子母树）
-    //maxx[1][n]表示从第i堆石子到第j堆石子合并为一堆石子的最大代价（即最大子母树）
-	printf(&quot;%d\n%d\n&quot;,minn[1][n],maxx[1][n]);
-	return 0;
-}
-</code></pre>
-<hr>
-<h3 id="colorredcolorboxyellow-树形dp"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="Red"><menclose mathbackground="Yellow"><mtext>！</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\color{Red}\colorbox{Yellow}{！}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2833299999999999em;vertical-align:-0.3em;"></span><span class="mord" style="color:Red;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9833299999999998em;"><span style="top:-2.98333em;"><span class="pstrut" style="height:3.28333em;"></span><span class="stretchy colorbox" style="color:Red;height:1.2833299999999999em;background-color:Yellow;"></span></span><span style="top:-3.28333em;"><span class="pstrut" style="height:3.28333em;"></span><span class="mord boxpad" style="color:Red;"><span class="mord cjk_fallback" style="color:Red;">！</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3em;"><span></span></span></span></span></span></span></span></span> 树形DP：</h3>
-<p><a href="https://oj.bashu.com.cn/pub/problempage.php?problem_id=1530">1530 加分二叉树</a></p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-
-#define maxn 35
-using namespace std;
-
-int a[maxn];
-int f[maxn][maxn];
-//f[i][j]表示i~j的最高加分值
-int p[maxn][maxn];
-//p[i][j]表示i~j段的根节点
-
-int Dp(int i,int j) //i~j作为一棵树的最高加分值
-{
-	if(i&gt;j) return 1; //i到j是一棵空树，返回1
-	if(i==j) return a[i]; //i到j只有一个节点（即叶节点），返回本身的值
-	if(f[i][j]&gt;0) return f[i][j]; //若曾经被遍历过，则直接返回其值
-	for(int k=i;k&lt;=j;k++) //在i~j中枚举k是根
-	{
-		int t=Dp(i,k-1)*Dp(k+1,j)+a[k]; //递归求左右两边的总值
-		if(t&gt;f[i][j]) //记录选择最优的根
-		{
-			f[i][j]=t; //保存当前的最高加分值
-			p[i][j]=k; //记录根的序号
-		}
-	}
-	return f[i][j];
-}
-
-void Out(int i,int j) //输出方案
-{
-	if(i&gt;j) return ; //i到j是一棵空树，返回
-	if(i==j) //i到j只有一个节点（即叶节点），输出本身的值
-	{
-		printf(&quot;%d &quot;,i);
-		return ;
-	}
-	printf(&quot;%d &quot;,p[i][j]); //由于是先序，所以先输出根
-	Out(i,p[i][j]-1); //递归输出左子树
-	Out(p[i][j]+1,j); //递归输出右子树
-}
-
-int main()
-{
-	int n;
-	scanf(&quot;%d&quot;,&amp;n);
-	for(int i=1;i&lt;=n;i++)
-		scanf(&quot;%d&quot;,&amp;a[i]);
-	Dp(1,n); //遍历求结果
-    //先输出最高加分值
-	printf(&quot;%d\n&quot;,f[1][n]);
-    //进入输出程序
-	Out(1,n); 
-	return 0;
-}
-</code></pre>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="Red"><menclose mathbackground="Yellow"><mtext>！</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\color{Red}\colorbox{Yellow}{！}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2833299999999999em;vertical-align:-0.3em;"></span><span class="mord" style="color:Red;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9833299999999998em;"><span style="top:-2.98333em;"><span class="pstrut" style="height:3.28333em;"></span><span class="stretchy colorbox" style="color:Red;height:1.2833299999999999em;background-color:Yellow;"></span></span><span style="top:-3.28333em;"><span class="pstrut" style="height:3.28333em;"></span><span class="mord boxpad" style="color:Red;"><span class="mord cjk_fallback" style="color:Red;">！</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3em;"><span></span></span></span></span></span></span></span></span><a href="https://oj.bashu.com.cn/pub/problempage.php?problem_id=1529">1529 二叉苹果树</a></p>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips1:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips1:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">1</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
-<p><strong>思路：</strong></p>
-<p>由题意可知，需要保留的树枝数量为Q条，即保留结点t=Q+1个。树根必须保留，可以分三种情况讨论保留苹果的最大数：</p>
-<ol>
-<li>
-<p>树根的左子树为空，全部保留右子树，右子树中保留（t-1）个结点；</p>
-</li>
-<li>
-<p>树根的右子树为空，全部保留左子树，左子树中保留（t-1）个结点；</p>
-</li>
-<li>
-<p>树根的两棵子树非空，设左子树保留k个结点，则右子树保留（t-k-1）个结点。</p>
-</li>
-</ol>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips2:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips2:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">2</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
-<p>对于memset的小坑点：</p>
-<p>memset常用来作初始化，但由于它的填充方法是<strong>字节填充</strong>，所以这对它造成了一些局限性。<strong>它只能对数组统一赋一些特殊值。</strong></p>
-<p>其中常用的赋值有：</p>
-<ul>
-<li>0</li>
-<li>-1</li>
-<li>0x3f</li>
-<li>0x7f</li>
-</ul>
-<p>其中【赋值】指的是<strong>memset函数中填写的值</strong>。以0x3f为例，即：</p>
-<pre><code>memset(a,0x3f,sizeof(a));
-</code></pre>
-<p>而实际上，a数组里的所有值已经全部变成了<strong>0x3f3f3f3f</strong>。</p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;cstring&gt;
-
-#define maxn 105
-using namespace std;
-
-int ch[maxn][2]; //ch[v][1]、ch[v][2]分别储存节点v的左右孩子
-int f[maxn][maxn]; //f[v][i]表示以v为根的树上保留i个节点的最大权值和
-int num[maxn]; //num[i]表示i的子节点的苹果数
-int a[maxn][maxn]; //输入数组
-int n,q;
-
-void BuildTree(int t) //建树
-{
-	for(int i=1;i&lt;=n;i++) //遍历子树
-		if(a[t][i]&gt;=0) //如果存在该节点是当前节点子节点
-		{
-			ch[t][1]=i; //先储存子节点序号
-			num[i]=a[t][i]; //再储存
-			a[t][i]=-1; a[i][t]=-1; //标记已遍历过
-			BuildTree(i); //继续遍历接下来的子树
-			break; //这个节点访问完毕
-		}
-	for(int i=1;i&lt;=n;i++) //思路同上，两次循环分别是访问左、右子树
-		if(a[t][i]&gt;=0)
-		{
-			ch[t][2]=i;
-			num[i]=a[t][i];
-			a[t][i]=-1; a[i][t]=-1;
-			BuildTree(i);
-			break;
-		}
-}
-
-int DP(int v,int t) //求v为根的树上保留i个节点的最大权值和
-{ 
-	int i; 
-	if(t==0) return 0;  //如果已经没有可以保留的节点，则return 0
-	if((ch[v][1]==0)&amp;&amp;(ch[v][2]==0)) return num[v];  //如果访问到叶节点，则返回叶结点的值
-	if(f[v][t]&gt;0) return f[v][t]; //记忆化搜索 f数组的初始值为-1
-	for(i=0;i&lt;=t-1;i++) //遍历t种情况
-		f[v][t]=max(f[v][t],DP(ch[v][1],i)+DP(ch[v][2],t-i-1)+num[v]);  //当前情况的最优值是左右孩子总的最优值
-	return f[v][t]; //返回当前点的最优情况
-}
-
-int main()
-{
-	memset(f,-1,sizeof(f)); //将f数组赋初值为-1，以便接下来的记忆化操作
-	cin&gt;&gt;n&gt;&gt;q;
-	q++; //因为在二叉树中点数=边数-1，所以为了求出边数，就用点数q+1，也就是++，来进行操作
-	for(int i=1;i&lt;n;i++)
-	{
-		int x,y,v;
-		cin&gt;&gt;x&gt;&gt;y&gt;&gt;v;
-		a[x][y]=v;
-		a[y][x]=v; //二叉树是无向的，一定要记得建双边
-	}
-	BuildTree(1); //从根节点1开始遍历
-	cout&lt;&lt;DP(1,q)&lt;&lt;endl; //按照我们对DP函数的定义，直接输出DP(1,q)即可
-	return 0;
-}
-</code></pre>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="Red"><menclose mathbackground="Yellow"><mtext>！</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\color{Red}\colorbox{Yellow}{！}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2833299999999999em;vertical-align:-0.3em;"></span><span class="mord" style="color:Red;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9833299999999998em;"><span style="top:-2.98333em;"><span class="pstrut" style="height:3.28333em;"></span><span class="stretchy colorbox" style="color:Red;height:1.2833299999999999em;background-color:Yellow;"></span></span><span style="top:-3.28333em;"><span class="pstrut" style="height:3.28333em;"></span><span class="mord boxpad" style="color:Red;"><span class="mord cjk_fallback" style="color:Red;">！</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3em;"><span></span></span></span></span></span></span></span></span><a href="https://oj.bashu.com.cn/pub/problempage.php?problem_id=1532">1532 树的最长链1171</a></p>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips1:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips1:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">1</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
-<p><strong>思路：</strong></p>
-<p>设j是i的子节点，f1、f2数组定义见代码</p>
-<ol>
-<li>若f1[j]+1&gt;f1[i]，则f2[i]=f1[i]；f1[i]=f1[j]+1</li>
-<li>否则，若f1[j]+1&gt;f2[i]，则f2[i]=f1[j]+1</li>
-<li>最后扫描所有的节点，找最大的f1[i]+f2[i]的值</li>
-</ol>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mrow><mtext mathvariant="fraktur">后更のtips1</mtext><mtext> </mtext><mtext mathvariant="fraktur">plus：</mtext></mrow></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{后更のtips1 plus：}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak cjk_fallback" style="color:CornflowerBlue;">后</span><span class="mord mathfrak cjk_fallback" style="color:CornflowerBlue;">更</span><span class="mord mathfrak cjk_fallback" style="color:CornflowerBlue;">の</span><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">1</span><span class="mord" style="color:CornflowerBlue;"> </span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">l</span><span class="mord mathfrak" style="color:CornflowerBlue;">u</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak cjk_fallback" style="color:CornflowerBlue;">：</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
-<p>在lmpp大佬的耐心讲解下，我又有了一点新的想法想补充呢qwq~</p>
-<ol>
-<li>为什么<code>f1[j]+1&gt;f1[i]，则f2[i]=f1[i]；f1[i]=f1[j]+1</code>？<br>
-对于这个问题，我还可以顺便更细致地讲解一下做题思路。</li>
-</ol>
-<p><strong>首先，题目求的最长链，究竟是树的哪一个部分呢？</strong></p>
-<p>下面这张图可以比较清晰的看出，树的最长链是<strong>由两条最长链，即此树的最长链和次长链链接而组成的。</strong></p>
-<figure data-type="image" tabindex="1"><img src="https://s1.ax1x.com/2020/03/24/8OtV4x.png" alt="8OtV4x.png" loading="lazy"></figure>
-<p>当子节点j能延伸出更长的链时，则可以将<strong>原来的次长链更新为以前的最长链（即<code>f2[i]=f1[i]</code>），再更新现在的最长链（即<code>f1[i]=f1[j]+1</code>）</strong></p>
-<ol start="2">
-<li>为什么<code>f1[j]+1&gt;f2[i]，则f2[i]=f1[j]+1</code>？</li>
-</ol>
-<p><strong>当现在的最长链大于以前次长链的长度时</strong>，就将当前次长链的长度替换成现在的最长链。</p>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips2:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips2:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">2</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
-<p><strong>前向星注意事项：</strong></p>
-<ul>
-<li>
-<p>结构体数组一定要开双倍！这一点可能会直接导致RE or WA！结构体数组之所以要开双倍，是因为在二叉树或者无向图问题中，<strong>通常需要建双边来表示两点联通，所以负责储存的结构体数组需要开双倍</strong>。</p>
-</li>
-<li>
-<p>关于结构体数组的叠加器cnt值是++cnt还是cnt++，这完全取决于定义与个人喜好。通常对于cnt=0的情况，我们会更乐意让cnt先做自增，即a[++cnt]。当然，也可以把cnt++放在操作外面进行，都是可以的。</p>
-</li>
-</ul>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-
-#define maxn 200010
-using namespace std;
-
-struct node
-{
-	int to; //第i条边的终点
-    int next; //与第i条边同起点的下一条边的储存位置
-}a[maxn&lt;&lt;1]; //这里一定要注意开两倍，详见tips
-
-int head[maxn]; //表示以i为起点的第一条边的存储位置
-int f1[maxn]; //f1[i]表示以i为根的子树中，i到叶子节点的距离最大值
-int f2[maxn]; //f2[i]表示以i为根的子树中，i到叶子节点的距离次大值
-int prt[maxn]; //prt[i]表示节点i的父亲
-int cnt; //结构体数组a的叠加器cnt
-int n;
-
-void AddEdge(int x,int y) //建边操作
-{
-	a[++cnt].next=head[x];
-	a[cnt].to=y;
-	head[x]=cnt;
-}
-
-void Dfs(int x)
-{
-	for(int i=head[x];i;i=a[i].next) //前向星遍历
-	{
-		int y=a[i].to; //找到a[i]的终点y
-        if(y==prt[x]) continue; //如果y是我们要找的点的父亲，即有联系，则结束本次循环
-        prt[y]=x; //否则，就将节点y连接到x身上，成为x的子节点
-        Dfs(y); //接着遍历已经是子节点的y
-        if(f1[y]+1&gt;f1[x]) //如果新添加的y节点能延伸出更长的链
-        {
-        	f2[x]=f1[x]; //则可以将原来的次长链更新为以前的最长链
-        	f1[x]=f1[y]+1; //再更新现在的最长链
-		}
-		else if(f1[y]+1&gt;f2[x]) //当现在的最长链大于以前次长链的长度时
-			f2[x]=f1[y]+1; //就将当前次长链的长度替换成现在的最长链
-    }
-}
-
-int main()
-{
-	scanf(&quot;%d&quot;,&amp;n);
-	for(int i=1;i&lt;=n-1;i++)
-	{
-		int qaq,qwq;
-		scanf(&quot;%d %d&quot;,&amp;qaq,&amp;qwq);
-		AddEdge(qaq+1,qwq+1); //建双边
-		AddEdge(qwq+1,qaq+1); 
-	}
-	Dfs(1);
-	int ans=-0x3f3f3f;
-	for(int i=1;i&lt;=n;i++)
-		ans=max(ans,f1[i]+f2[i]); //最后扫描所有的节点，找最大的f1[i]+f2[i]的值，也就是找最长链
-	cout&lt;&lt;ans&lt;&lt;endl;
-	return 0;
-}
-</code></pre>
-<hr>
-<h3 id="colorredcolorboxyellow-部分和"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="Red"><menclose mathbackground="Yellow"><mtext>！</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\color{Red}\colorbox{Yellow}{！}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2833299999999999em;vertical-align:-0.3em;"></span><span class="mord" style="color:Red;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9833299999999998em;"><span style="top:-2.98333em;"><span class="pstrut" style="height:3.28333em;"></span><span class="stretchy colorbox" style="color:Red;height:1.2833299999999999em;background-color:Yellow;"></span></span><span style="top:-3.28333em;"><span class="pstrut" style="height:3.28333em;"></span><span class="mord boxpad" style="color:Red;"><span class="mord cjk_fallback" style="color:Red;">！</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3em;"><span></span></span></span></span></span></span></span></span> 部分和：</h3>
-<p><a href="https://oj.bashu.com.cn/pub/problempage.php?problem_id=1356">1356 最大子矩阵问题</a></p>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="CornflowerBlue"><menclose mathbackground="Lavender"><mtext mathvariant="fraktur">tips:</mtext></menclose></mstyle></mrow><annotation encoding="application/x-tex">\mathfrak\color{CornflowerBlue}\colorbox{Lavender}{tips:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.48047em;vertical-align:-0.48906em;"></span><span class="mord" style="color:CornflowerBlue;"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914099999999999em;"><span style="top:-2.99141em;"><span class="pstrut" style="height:3.48047em;"></span><span class="stretchy colorbox" style="color:CornflowerBlue;height:1.48047em;background-color:Lavender;"></span></span><span style="top:-3.48047em;"><span class="pstrut" style="height:3.48047em;"></span><span class="mord boxpad" style="color:CornflowerBlue;"><span class="mord mathfrak" style="color:CornflowerBlue;">t</span><span class="mord mathfrak" style="color:CornflowerBlue;">i</span><span class="mord mathfrak" style="color:CornflowerBlue;">p</span><span class="mord mathfrak" style="color:CornflowerBlue;">s</span><span class="mord mathfrak" style="color:CornflowerBlue;">:</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.48906em;"><span></span></span></span></span></span></span></span></span></p>
-<p><strong>思路：</strong></p>
-<p>最大子矩阵问题就是最大连续子序列和问题的提升，即<strong>将一条线换成一个面，将一维问题提升到二维问题</strong>。</p>
-<p>我们可以想到：在一个一维的数列中，设数组b[i]表示从第1个元素到第i个元素的和，则如果想要求第i个元素到第j个元素的和，只需要计算b[j]-b[i-1]的值就行了。由此推广到二维矩阵，<strong>设b[i][j]表示矩阵第j列前i个元素的和，a[i][j]表示元素数据，则压缩存储：</strong></p>
-<pre><code>for(i=1;i&lt;=n;i++)
-	for(j=1;j&lt;=n;j++)
-    {
-    	cin&gt;&gt;a[i][j];
-        b[i][j]=b[i-1][j]+a[i][j];
-    }
-</code></pre>
-<p>因此，我们可以<strong>使用三重循环求出所有的矩形值，即枚举起始行i和终止行j，压缩子矩形成为一行，变成一维求最大字段和问题。</strong> 即：</p>
-<pre><code>t[k]=max(t[k-1],0)+b[j][k]-b[i-1][k];
-
-</code></pre>
-<p><strong>（以上的tips【思路】均摘自did的PPT，由于阐述实在太到位了，自己也写不出来好的，所以直接引用学习了qwq）</strong></p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-
-#define maxn 305
-using namespace std;
-
-int a[maxn][maxn];
-int b[maxn][maxn]; //b[i][j]表示矩阵第j列前i个元素的和，前缀和数组
-int t[maxn]; //t[i]表示从数组最开始到i的和，前缀和优化数组
-
-int main()
-{
-	int n;
-	cin&gt;&gt;n;
-	for(int i=1;i&lt;=n;i++)
-		for(int j=1;j&lt;=n;j++)
-		{
-			cin&gt;&gt;a[i][j];
-			b[i][j]=b[i-1][j]+a[i][j]; //前缀和累加过程
-		}
-	int ans=-0x3f3f3f;
-	for(int i=1;i&lt;=n;i++) //阶段：起始行
-		for(int j=i;j&lt;=n;j++) //状态：结束行
-		{
-			t[1]=b[j][1]-b[i-1][1]; //初始化第一列的值
-			for(int k=2;k&lt;=n;k++) //决策：第几列
-			{
-				t[k]=max(t[k-1],0)+b[j][k]-b[i-1][k]; 						//max(t[k-1],0)：只要上一项不为负数，则直接加到当前值的累加中
-                //+b[j][k]-b[i-1][k]：二维前缀和求矩阵数字和
-				if(t[k]&gt;ans) ans=t[k]; //在操作时直接统计最大的矩阵和
-			}
-		}
-	cout&lt;&lt;ans&lt;&lt;endl;
-	return 0;
-}
-</code></pre>
 ]]></content>
     </entry>
 </feed>
