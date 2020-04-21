@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MrContinue.github.io</id>
     <title>Continue的博客</title>
-    <updated>2020-04-19T15:26:34.416Z</updated>
+    <updated>2020-04-21T01:05:41.792Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MrContinue.github.io"/>
     <link rel="self" href="https://MrContinue.github.io/atom.xml"/>
-    <subtitle>请你照亮我前进的路</subtitle>
+    <subtitle>我从心底里爱着…你内心深处沉睡着的希望</subtitle>
     <logo>https://MrContinue.github.io/images/avatar.png</logo>
     <icon>https://MrContinue.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Continue的博客</rights>
@@ -17,7 +17,7 @@
         </link>
         <updated>2020-04-19T14:40:11.000Z</updated>
         <content type="html"><![CDATA[<h2 id="写作起因">写作起因</h2>
-<p>总感觉自己容易咕咕，只有在任务非常非常急的时候才会才会触发被动技能：一日爆肝，于是可以再一个下午之内肝出17000+字。</p>
+<p>总感觉自己容易咕咕，只有在任务非常非常急的时候才会才会触发被动技能：一日爆肝，于是可以在一个下午之内肝出17000+字。</p>
 <p>可是既然大家基本上都有这个被动技能，为什么大佬们的高质量博客总是姗姗来迟呢？</p>
 <p>为了探究博客的质量问题，我决定水这一篇文章，并且做一个小小的实验。</p>
 <hr>
