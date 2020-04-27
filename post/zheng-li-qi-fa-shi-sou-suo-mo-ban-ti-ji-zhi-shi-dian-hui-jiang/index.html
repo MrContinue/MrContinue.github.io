@@ -1,0 +1,517 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>【整理】启发式搜索模板题及知识点汇讲 | Continue的博客</title>
+<link rel="shortcut icon" href="https://MrContinue.github.io/favicon.ico?v=1587996954688">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://MrContinue.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="【整理】启发式搜索模板题及知识点汇讲 | Continue的博客 - Atom Feed" href="https://MrContinue.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="阅前必读
+本博客纯手写，无借鉴，请大胆的提意见哦QwQ
+
+优先队列BFS
+回顾普通BFS——BFS+普通队列
+BFS是什么
+BFS，宽度优先搜索。
+它的搜索方式就像涟漪一样，是一层一层遍历下去。具体见下图：
+
+cnt表示遍历的层次。
+所谓“..." />
+    <meta name="keywords" content="知识点汇总" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://MrContinue.github.io">
+  <img class="avatar" src="https://MrContinue.github.io/images/avatar.png?v=1587996954688" alt="">
+  </a>
+  <h1 class="site-title">
+    Continue的博客
+  </h1>
+  <p class="site-description">
+    我从心底里爱着…你内心深处沉睡着的希望
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="https://MrContinue.github.io/post/about-me" class="menu">
+          About Me
+        </a>
+      
+    
+      
+        <a href="https://MrContinue.github.io/post/wo-de-hao-peng-you-meng" class="menu">
+          我的好朋友萌！（友链）
+        </a>
+      
+    
+      
+        <a href="https://MrContinue.github.io/post/lian-xi-wo" class="menu">
+          联系方式
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/MrContinue" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+        <a href="https://www.zhihu.com/people/gradually-disappear" target="_blank">
+          <i class="ri-zhihu-line"></i>
+        </a>
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              【整理】启发式搜索模板题及知识点汇讲
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-04-21
+              </span>
+              <span>
+                10 min read
+              </span>
+              
+                <a href="https://MrContinue.github.io/tag/9wIK6lfsm/" class="post-tag">
+                  # 知识点汇总
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://MrContinue.github.io/post-images/zheng-li-qi-fa-shi-sou-suo-mo-ban-ti-ji-zhi-shi-dian-hui-jiang.jpg" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="阅前必读">阅前必读</h2>
+<p>本博客纯手写，无借鉴，请大胆的提意见哦QwQ</p>
+<hr>
+<h2 id="优先队列bfs">优先队列BFS</h2>
+<h3 id="回顾普通bfsbfs普通队列">回顾普通BFS——BFS+普通队列</h3>
+<h4 id="bfs是什么">BFS是什么</h4>
+<p>BFS，宽度优先搜索。<br>
+它的搜索方式就像涟漪一样，是<strong>一层一层</strong>遍历下去。具体见下图：<br>
+<img src="https://MrContinue.github.io/post-images/1587480080689.png" alt="" loading="lazy"><br>
+cnt表示遍历的层次。</p>
+<p>所谓“涟漪式”的遍历，其实就是<strong>以层次的不断向目标状态展开，对图中每一个点的最优值更新，从而达到遍历至目标状态时的最优值。</strong></p>
+<h4 id="bfs可以干什么">BFS可以干什么？</h4>
+<p>一般出现<strong>最短路径</strong>和<strong>最佳方案</strong>时可以使用BFS遍历。</p>
+<h4 id="bfs普通队列怎么写">BFS+普通队列怎么写？</h4>
+<p>下面是伪代码：</p>
+<pre><code>void BFS(int x)
+{
+        初始化队列Q;
+        标记x已遍历;
+        Q.push(x);
+        while(!Q.empty())
+        {
+                int u=Q.top();
+                Q.pop();
+                if(u==目标状态)
+                {
+                      ……
+                }
+                Q.push(与u相连的未被访问的所有点);
+                标记u已遍历;
+        }
+}
+</code></pre>
+<p>注：BFS+普通队列对应的是<strong>SPFA算法</strong>。</p>
+<h3 id="学习优化bfsbfs优先队列">学习优化BFS——BFS+优先队列</h3>
+<p>优化BFS算法采用<strong>Dijkstra堆优化的方式求解</strong>。<br>
+注：BFS+优先队列对应的是<strong>Dijkstra算法</strong>。</p>
+<h4 id="dijkstra简单回顾">Dijkstra简单回顾</h4>
+<p>从源点开始向自己的子节点扩展，将已拓展到的子节点对应的边权加入数组d当中，再在数组d当中选取一个最小值，从这个值对应的节点开始继续向下搜索。</p>
+<p>值得一提的是，Dijkstra中，d数组里储存的“边权”是相对于源点来说的。<br>
+还没有回忆起来？这张图也许能帮到你：<br>
+<img src="https://MrContinue.github.io/post-images/1587567326814.png" alt="" loading="lazy"></p>
+<h5 id="dijkstra代码简单回顾">Dijkstra代码简单回顾</h5>
+<pre><code>void D()
+{
+	for(int i=1;i&lt;=n;i++)
+		a[i]=inf; //初始化
+	int k;
+	a[s]=0; //第一个节点（即根节点）距离根节点（即自己）的距离为0
+	prt[s]=0; //第一个节点的父亲定义为0
+	for(int i=1;i&lt;=n;i++)
+	{
+		int minn=inf; //找最小边权
+		for(int j=1;j&lt;=n;j++)
+			if(!vis[j]) //如果未访问过
+				if(a[j]&lt;minn) //且此边权小于当前最小边权
+				{
+					minn=a[j]; //则更新最小边权
+					k=j; //记录此节点
+				}
+		vis[k]=1; //访问该节点
+		for(int j=1;j&lt;=n;j++)
+			if(g[k][j]&gt;0&amp;&amp;!vis[j]) //更新与该节点有连接的点的边权值
+				if(a[k]+g[k][j]&lt;a[j]) //松弛操作
+				{
+					a[j]=a[k]+g[k][j];
+					prt[j]=k; //记录更新它的值的节点
+				}
+	}
+}
+</code></pre>
+<p>而在寻找d数组里的最小值时需要O(n)的复杂度，所以我们期望有一种方法可以降低寻找最小值的复杂度。<br>
+由于优先队列的最优性质，我们可以用堆优化Dijkstra。</p>
+<h4 id="我们怎么用堆优化dijkstra">我们怎么用堆优化Dijkstra？</h4>
+<p>前文提到过堆的用途。所以我们只需要将每次的边权push到堆里，每次取出时就不需要用O(n)的时间来寻找最小值了，直接取堆顶即可。<br>
+关于堆，它查询的复杂度是O(1)，处理节点（插入、删除等）的复杂度为O(logn)。</p>
+<h4 id="堆优化dijkstra的细节">堆优化Dijkstra的细节</h4>
+<p>我们在写普通Dijkstra的时候会用到节点的序号，但是我们在用堆优化的时候暂时无法自定义堆自己维护时的规则，所以这个时候我们需要运用<strong>重载运算符</strong>。</p>
+<h5 id="重载运算符">重载运算符</h5>
+<p>先丢一段模板代码，接着我们再来慢慢分析：</p>
+<pre><code>struct Heap
+{
+	int d,num;
+	bool operator &lt; (const Heap&amp; a)const
+	{
+		return d&gt;a.d;
+	}
+};
+</code></pre>
+<p>在结构体Heap中，先定义了两个变量d和num，紧接着是重载运算符的函数。</p>
+<h6 id="关于各个部分的细节分析">关于各个部分的细节分析</h6>
+<p>函数的类型是<strong>bool</strong>，大致概念可以联系sort里的cmp函数进行理解。</p>
+<p>关于<strong>operator</strong>是判断重载运算符的一个标志，英文释义有“操作人员;技工;电话员;接线员;(某企业的)经营者，专业公司”等释义，放在这里大致可以理解为<strong>进行操作的东西</strong>。</p>
+<p><strong>const Heap&amp; a</strong>相当于定义了一个Heap类型的变量a，方便等会我们括号内的比较操作。</p>
+<p>括号内的内容可以与sort里的cmp函数类比，差不多一个概念，只不过这里的第二个比较数是通过Heap类型的变量a引用的。</p>
+<p><strong>和一个函数一样，重载运算符是必须要用一对花括号扩上的。</strong></p>
+<p>重载运算符成功过后，堆对自己的维护就可以根据结构体内的定义进行操作。</p>
+<h4 id="关于堆优化重载运算符的注意事项">关于堆优化重载运算符的注意事项</h4>
+<p><strong>非常重要的是，当我们在重载运算符时，return时的符号应该与想得到的最值符号相反。</strong><br>
+也就是说，如果想得到a和b中的最大值，反而需要用return a＜b；同样，如果想要得到a、b之中的最小值，则需要return a&gt;b。</p>
+<p>其原因可以看下图理解一下。<br>
+<img src="https://MrContinue.github.io/post-images/1587729088405.png" alt="" loading="lazy"></p>
+<h3 id="题目代码理解">题目+代码理解</h3>
+<p><a href="https://www.luogu.com.cn/problem/P1828">香甜的黄油</a></p>
+<h4 id="description">Description</h4>
+<pre><code>农夫John发现做出全威斯康辛州最甜的黄油的方法：糖。把糖放在一片牧场上，他知道N（1&lt;=N&lt;=500）只奶牛会过来舔它，这样就能做出能卖好价钱的超甜黄油。当然，他将付出额外的费用在奶牛上。
+农夫John很狡猾。像以前的巴甫洛夫，他知道他可以训练这些奶牛，让它们在听到铃声时去一个特定的牧场。他打算将糖放在那里然后下午发出铃声，以至他可以在晚上挤奶。
+农夫John知道每只奶牛都在各自喜欢的牧场（一个牧场不一定只有一头牛）。给出各头牛在的牧场和牧场间的路线，找出使所有牛到达的路程和最短的牧场（他将把糖放在那）。
+</code></pre>
+<h4 id="input">Input</h4>
+<pre><code>第一行: 三个数：奶牛数N，牧场数P（2&lt;=P&lt;=800），牧场间道路数C(1&lt;=C&lt;=1450)。
+第二行到第N+1行: 1到N头奶牛所在的牧场号。
+第N+2行到第N+C+1行：每行有三个数：相连的牧场A、B，两牧场间距（1&lt;=D&lt;=255），当然，连接是双向的。
+</code></pre>
+<h4 id="output">Output</h4>
+<pre><code>一行 输出奶牛必须行走的最小的距离和。
+</code></pre>
+<h4 id="sample-input">Sample Input</h4>
+<pre><code>3 4 5
+2
+3
+4
+1 2 1
+1 3 5
+2 3 7
+2 4 3
+3 4 5
+</code></pre>
+<h4 id="sample-output">Sample Output</h4>
+<pre><code>8
+</code></pre>
+<h4 id="hint">Hint</h4>
+<pre><code>说明：放在4号牧场最优。
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://oj.bashu.com.cn/images/p1431.gif" alt="" loading="lazy"></figure>
+<hr>
+<p>因为是求最短路径，<s>又因为SPFA死了</s>，所以我们可以考虑用Dijkstra枚举求解，大概思路就是枚举放在每个节点的路径长度，最后择取最小的一条。<br>
+但是很明显，普通的Dijkstra会T掉，所以我们考虑使用堆优化Dijkstra，这样就可以愉快的枚举了。</p>
+<p>贴代码，具体的细节和部分知识解释都放在代码注释里了：</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;queue&gt;
+
+#define maxn 1465
+#define inf 0x7fffffff/2
+using namespace std;
+
+int dis[maxn];
+int head[maxn+10],cnt;
+int e,n,m;
+int k=inf;
+int s,t;
+
+int cow[maxn];
+
+inline int Read() //快读模板
+//对快读感兴趣的同学可以看看我对快读讲解的小短文
+//链接：https://mrcontinue.xyz/post/zheng-li-shou-xie-kuai-du-mo-ban-ji-jian-dan-fen-xi/
+{
+	int s=0;
+	int f=1;
+	char ch=getchar();
+	while(ch&lt;'0'||ch&gt;'9')
+	{
+		if(ch=='-')
+			f==-1;
+		ch=getchar();
+	}
+	while(ch&gt;='0'&amp;&amp;ch&lt;='9')
+	{
+		s=(s&lt;&lt;1)+(s&lt;&lt;3)+ch-'0';
+		ch=getchar();
+	}
+	return s*f;
+}
+
+struct Edge
+{
+	int to,next,w;
+}a[maxn&lt;&lt;1]; //前向星数组，w用于存边权
+
+struct Heap
+{
+	int d,num; //变量d用来储存变量本身的数值，变量num用来储存变量的序号
+	bool operator &lt; (const Heap&amp; rhs)const
+	{
+		return d&gt;rhs.d;
+	} //重载运算符
+}; //我们之前花了大量的笔墨来讲解的堆优化结构体
+
+void AddEdge(int x,int y,int v) //前向星连边操作
+{
+	a[++cnt].next=head[x];
+	a[cnt].to=y;
+	a[cnt].w=v;
+	head[x]=cnt;
+}
+
+bool vis[maxn]; //记录是否被访问
+int d[maxn]; //d[i]记录节点i离源点的距离
+
+int Dij(int x)
+{
+	priority_queue &lt;Heap&gt; Q; //定义一个储存节点的堆Q
+	memset(vis,0,sizeof(vis));
+	for(int i=1;i&lt;=n;i++)
+		d[i]=inf; //Dijkstra日常操作
+	d[x]=0;
+	Q.push((Heap){ d[x],x }); //将当前节点的序号和值push到堆里面
+	while(!Q.empty()) //Dijkstra日常操作，就是查找部分变成了堆的查找
+	{
+		Heap u=Q.top();
+		Q.pop();
+		int s=u.num;
+		if(vis[s]) continue;
+		vis[s]=1;
+		for(int i=head[s];i;i=a[i].next)
+		{
+			int y=a[i].to;
+			if(!vis[y] &amp;&amp; d[s]+a[i].w&lt;d[y])
+			{
+				d[y]=d[s]+a[i].w;
+				Q.push((Heap){ d[y],y });
+			}
+		}
+	}
+	int ans=0;
+	for(int i=1;i&lt;=e;i++)
+		ans+=d[cow[i]];
+	return ans;
+}
+	
+int main()
+{
+	e=Read();
+	n=Read();
+	m=Read();
+	for(int i=1;i&lt;=e;i++)
+		cow[i]=Read(); 
+	for(int i=1;i&lt;=m;i++)
+	{
+		int x,y,v;
+		x=Read();
+		y=Read();
+		v=Read();
+		AddEdge(x,y,v);
+		AddEdge(y,x,v); //建边操作
+	}
+	for(int i=1;i&lt;=n;i++)
+		k=min(k,Dij(i));
+	printf(&quot;%d\n&quot;,k);
+	return 0;
+}
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E9%98%85%E5%89%8D%E5%BF%85%E8%AF%BB">阅前必读</a></li>
+<li><a href="#%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97bfs">优先队列BFS</a>
+<ul>
+<li><a href="#%E5%9B%9E%E9%A1%BE%E6%99%AE%E9%80%9Abfsbfs%E6%99%AE%E9%80%9A%E9%98%9F%E5%88%97">回顾普通BFS——BFS+普通队列</a>
+<ul>
+<li><a href="#bfs%E6%98%AF%E4%BB%80%E4%B9%88">BFS是什么</a></li>
+<li><a href="#bfs%E5%8F%AF%E4%BB%A5%E5%B9%B2%E4%BB%80%E4%B9%88">BFS可以干什么？</a></li>
+<li><a href="#bfs%E6%99%AE%E9%80%9A%E9%98%9F%E5%88%97%E6%80%8E%E4%B9%88%E5%86%99">BFS+普通队列怎么写？</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AD%A6%E4%B9%A0%E4%BC%98%E5%8C%96bfsbfs%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97">学习优化BFS——BFS+优先队列</a>
+<ul>
+<li><a href="#dijkstra%E7%AE%80%E5%8D%95%E5%9B%9E%E9%A1%BE">Dijkstra简单回顾</a>
+<ul>
+<li><a href="#dijkstra%E4%BB%A3%E7%A0%81%E7%AE%80%E5%8D%95%E5%9B%9E%E9%A1%BE">Dijkstra代码简单回顾</a></li>
+</ul>
+</li>
+<li><a href="#%E6%88%91%E4%BB%AC%E6%80%8E%E4%B9%88%E7%94%A8%E5%A0%86%E4%BC%98%E5%8C%96dijkstra">我们怎么用堆优化Dijkstra？</a></li>
+<li><a href="#%E5%A0%86%E4%BC%98%E5%8C%96dijkstra%E7%9A%84%E7%BB%86%E8%8A%82">堆优化Dijkstra的细节</a>
+<ul>
+<li><a href="#%E9%87%8D%E8%BD%BD%E8%BF%90%E7%AE%97%E7%AC%A6">重载运算符</a>
+<ul>
+<li><a href="#%E5%85%B3%E4%BA%8E%E5%90%84%E4%B8%AA%E9%83%A8%E5%88%86%E7%9A%84%E7%BB%86%E8%8A%82%E5%88%86%E6%9E%90">关于各个部分的细节分析</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%85%B3%E4%BA%8E%E5%A0%86%E4%BC%98%E5%8C%96%E9%87%8D%E8%BD%BD%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">关于堆优化重载运算符的注意事项</a></li>
+</ul>
+</li>
+<li><a href="#%E9%A2%98%E7%9B%AE%E4%BB%A3%E7%A0%81%E7%90%86%E8%A7%A3">题目+代码理解</a>
+<ul>
+<li><a href="#description">Description</a></li>
+<li><a href="#input">Input</a></li>
+<li><a href="#output">Output</a></li>
+<li><a href="#sample-input">Sample Input</a></li>
+<li><a href="#sample-output">Sample Output</a></li>
+<li><a href="#hint">Hint</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://MrContinue.github.io/post/te-ji-ren-zhen-xie-de-yi-pian-bo-ke-dao-di-he-gan-zuo-ye-de-bo-ke-you-shi-me-qu-bie/">
+              <h3 class="post-title">
+                【特辑】一篇认真写的博客和赶作业的博客到底有什么区别？
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'adc657b4279d628135fa',
+    clientSecret: 'f1ef8bc9a885f46ca98b54e7770c0c58c6ef1b72',
+    repo: 'mrcontinue.github.io',
+    owner: 'continue',
+    admin: ['continue'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://MrContinue.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

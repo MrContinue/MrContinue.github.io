@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MrContinue.github.io</id>
     <title>Continue的博客</title>
-    <updated>2020-04-24T11:52:50.619Z</updated>
+    <updated>2020-04-27T14:16:11.490Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MrContinue.github.io"/>
     <link rel="self" href="https://MrContinue.github.io/atom.xml"/>
@@ -110,6 +110,269 @@ continue居然还写出了一份（并没有卵用的）信竞总结！这让她
 <hr>
 <p>总之，最最美丽的mom。生日快乐！<br>
 ❤️💛💚💙💜</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[【整理】启发式搜索模板题及知识点汇讲]]></title>
+        <id>https://MrContinue.github.io/post/zheng-li-qi-fa-shi-sou-suo-mo-ban-ti-ji-zhi-shi-dian-hui-jiang/</id>
+        <link href="https://MrContinue.github.io/post/zheng-li-qi-fa-shi-sou-suo-mo-ban-ti-ji-zhi-shi-dian-hui-jiang/">
+        </link>
+        <updated>2020-04-21T13:20:09.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="阅前必读">阅前必读</h2>
+<p>本博客纯手写，无借鉴，请大胆的提意见哦QwQ</p>
+<hr>
+<h2 id="优先队列bfs">优先队列BFS</h2>
+<h3 id="回顾普通bfsbfs普通队列">回顾普通BFS——BFS+普通队列</h3>
+<h4 id="bfs是什么">BFS是什么</h4>
+<p>BFS，宽度优先搜索。<br>
+它的搜索方式就像涟漪一样，是<strong>一层一层</strong>遍历下去。具体见下图：<br>
+<img src="https://MrContinue.github.io/post-images/1587480080689.png" alt="" loading="lazy"><br>
+cnt表示遍历的层次。</p>
+<p>所谓“涟漪式”的遍历，其实就是<strong>以层次的不断向目标状态展开，对图中每一个点的最优值更新，从而达到遍历至目标状态时的最优值。</strong></p>
+<h4 id="bfs可以干什么">BFS可以干什么？</h4>
+<p>一般出现<strong>最短路径</strong>和<strong>最佳方案</strong>时可以使用BFS遍历。</p>
+<h4 id="bfs普通队列怎么写">BFS+普通队列怎么写？</h4>
+<p>下面是伪代码：</p>
+<pre><code>void BFS(int x)
+{
+        初始化队列Q;
+        标记x已遍历;
+        Q.push(x);
+        while(!Q.empty())
+        {
+                int u=Q.top();
+                Q.pop();
+                if(u==目标状态)
+                {
+                      ……
+                }
+                Q.push(与u相连的未被访问的所有点);
+                标记u已遍历;
+        }
+}
+</code></pre>
+<p>注：BFS+普通队列对应的是<strong>SPFA算法</strong>。</p>
+<h3 id="学习优化bfsbfs优先队列">学习优化BFS——BFS+优先队列</h3>
+<p>优化BFS算法采用<strong>Dijkstra堆优化的方式求解</strong>。<br>
+注：BFS+优先队列对应的是<strong>Dijkstra算法</strong>。</p>
+<h4 id="dijkstra简单回顾">Dijkstra简单回顾</h4>
+<p>从源点开始向自己的子节点扩展，将已拓展到的子节点对应的边权加入数组d当中，再在数组d当中选取一个最小值，从这个值对应的节点开始继续向下搜索。</p>
+<p>值得一提的是，Dijkstra中，d数组里储存的“边权”是相对于源点来说的。<br>
+还没有回忆起来？这张图也许能帮到你：<br>
+<img src="https://MrContinue.github.io/post-images/1587567326814.png" alt="" loading="lazy"></p>
+<h5 id="dijkstra代码简单回顾">Dijkstra代码简单回顾</h5>
+<pre><code>void D()
+{
+	for(int i=1;i&lt;=n;i++)
+		a[i]=inf; //初始化
+	int k;
+	a[s]=0; //第一个节点（即根节点）距离根节点（即自己）的距离为0
+	prt[s]=0; //第一个节点的父亲定义为0
+	for(int i=1;i&lt;=n;i++)
+	{
+		int minn=inf; //找最小边权
+		for(int j=1;j&lt;=n;j++)
+			if(!vis[j]) //如果未访问过
+				if(a[j]&lt;minn) //且此边权小于当前最小边权
+				{
+					minn=a[j]; //则更新最小边权
+					k=j; //记录此节点
+				}
+		vis[k]=1; //访问该节点
+		for(int j=1;j&lt;=n;j++)
+			if(g[k][j]&gt;0&amp;&amp;!vis[j]) //更新与该节点有连接的点的边权值
+				if(a[k]+g[k][j]&lt;a[j]) //松弛操作
+				{
+					a[j]=a[k]+g[k][j];
+					prt[j]=k; //记录更新它的值的节点
+				}
+	}
+}
+</code></pre>
+<p>而在寻找d数组里的最小值时需要O(n)的复杂度，所以我们期望有一种方法可以降低寻找最小值的复杂度。<br>
+由于优先队列的最优性质，我们可以用堆优化Dijkstra。</p>
+<h4 id="我们怎么用堆优化dijkstra">我们怎么用堆优化Dijkstra？</h4>
+<p>前文提到过堆的用途。所以我们只需要将每次的边权push到堆里，每次取出时就不需要用O(n)的时间来寻找最小值了，直接取堆顶即可。<br>
+关于堆，它查询的复杂度是O(1)，处理节点（插入、删除等）的复杂度为O(logn)。</p>
+<h4 id="堆优化dijkstra的细节">堆优化Dijkstra的细节</h4>
+<p>我们在写普通Dijkstra的时候会用到节点的序号，但是我们在用堆优化的时候暂时无法自定义堆自己维护时的规则，所以这个时候我们需要运用<strong>重载运算符</strong>。</p>
+<h5 id="重载运算符">重载运算符</h5>
+<p>先丢一段模板代码，接着我们再来慢慢分析：</p>
+<pre><code>struct Heap
+{
+	int d,num;
+	bool operator &lt; (const Heap&amp; a)const
+	{
+		return d&gt;a.d;
+	}
+};
+</code></pre>
+<p>在结构体Heap中，先定义了两个变量d和num，紧接着是重载运算符的函数。</p>
+<h6 id="关于各个部分的细节分析">关于各个部分的细节分析</h6>
+<p>函数的类型是<strong>bool</strong>，大致概念可以联系sort里的cmp函数进行理解。</p>
+<p>关于<strong>operator</strong>是判断重载运算符的一个标志，英文释义有“操作人员;技工;电话员;接线员;(某企业的)经营者，专业公司”等释义，放在这里大致可以理解为<strong>进行操作的东西</strong>。</p>
+<p><strong>const Heap&amp; a</strong>相当于定义了一个Heap类型的变量a，方便等会我们括号内的比较操作。</p>
+<p>括号内的内容可以与sort里的cmp函数类比，差不多一个概念，只不过这里的第二个比较数是通过Heap类型的变量a引用的。</p>
+<p><strong>和一个函数一样，重载运算符是必须要用一对花括号扩上的。</strong></p>
+<p>重载运算符成功过后，堆对自己的维护就可以根据结构体内的定义进行操作。</p>
+<h4 id="关于堆优化重载运算符的注意事项">关于堆优化重载运算符的注意事项</h4>
+<p><strong>非常重要的是，当我们在重载运算符时，return时的符号应该与想得到的最值符号相反。</strong><br>
+也就是说，如果想得到a和b中的最大值，反而需要用return a＜b；同样，如果想要得到a、b之中的最小值，则需要return a&gt;b。</p>
+<p>其原因可以看下图理解一下。<br>
+<img src="https://MrContinue.github.io/post-images/1587729088405.png" alt="" loading="lazy"></p>
+<h3 id="题目代码理解">题目+代码理解</h3>
+<p><a href="https://www.luogu.com.cn/problem/P1828">香甜的黄油</a></p>
+<h4 id="description">Description</h4>
+<pre><code>农夫John发现做出全威斯康辛州最甜的黄油的方法：糖。把糖放在一片牧场上，他知道N（1&lt;=N&lt;=500）只奶牛会过来舔它，这样就能做出能卖好价钱的超甜黄油。当然，他将付出额外的费用在奶牛上。
+农夫John很狡猾。像以前的巴甫洛夫，他知道他可以训练这些奶牛，让它们在听到铃声时去一个特定的牧场。他打算将糖放在那里然后下午发出铃声，以至他可以在晚上挤奶。
+农夫John知道每只奶牛都在各自喜欢的牧场（一个牧场不一定只有一头牛）。给出各头牛在的牧场和牧场间的路线，找出使所有牛到达的路程和最短的牧场（他将把糖放在那）。
+</code></pre>
+<h4 id="input">Input</h4>
+<pre><code>第一行: 三个数：奶牛数N，牧场数P（2&lt;=P&lt;=800），牧场间道路数C(1&lt;=C&lt;=1450)。
+第二行到第N+1行: 1到N头奶牛所在的牧场号。
+第N+2行到第N+C+1行：每行有三个数：相连的牧场A、B，两牧场间距（1&lt;=D&lt;=255），当然，连接是双向的。
+</code></pre>
+<h4 id="output">Output</h4>
+<pre><code>一行 输出奶牛必须行走的最小的距离和。
+</code></pre>
+<h4 id="sample-input">Sample Input</h4>
+<pre><code>3 4 5
+2
+3
+4
+1 2 1
+1 3 5
+2 3 7
+2 4 3
+3 4 5
+</code></pre>
+<h4 id="sample-output">Sample Output</h4>
+<pre><code>8
+</code></pre>
+<h4 id="hint">Hint</h4>
+<pre><code>说明：放在4号牧场最优。
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://oj.bashu.com.cn/images/p1431.gif" alt="" loading="lazy"></figure>
+<hr>
+<p>因为是求最短路径，<s>又因为SPFA死了</s>，所以我们可以考虑用Dijkstra枚举求解，大概思路就是枚举放在每个节点的路径长度，最后择取最小的一条。<br>
+但是很明显，普通的Dijkstra会T掉，所以我们考虑使用堆优化Dijkstra，这样就可以愉快的枚举了。</p>
+<p>贴代码，具体的细节和部分知识解释都放在代码注释里了：</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;queue&gt;
+
+#define maxn 1465
+#define inf 0x7fffffff/2
+using namespace std;
+
+int dis[maxn];
+int head[maxn+10],cnt;
+int e,n,m;
+int k=inf;
+int s,t;
+
+int cow[maxn];
+
+inline int Read() //快读模板
+//对快读感兴趣的同学可以看看我对快读讲解的小短文
+//链接：https://mrcontinue.xyz/post/zheng-li-shou-xie-kuai-du-mo-ban-ji-jian-dan-fen-xi/
+{
+	int s=0;
+	int f=1;
+	char ch=getchar();
+	while(ch&lt;'0'||ch&gt;'9')
+	{
+		if(ch=='-')
+			f==-1;
+		ch=getchar();
+	}
+	while(ch&gt;='0'&amp;&amp;ch&lt;='9')
+	{
+		s=(s&lt;&lt;1)+(s&lt;&lt;3)+ch-'0';
+		ch=getchar();
+	}
+	return s*f;
+}
+
+struct Edge
+{
+	int to,next,w;
+}a[maxn&lt;&lt;1]; //前向星数组，w用于存边权
+
+struct Heap
+{
+	int d,num; //变量d用来储存变量本身的数值，变量num用来储存变量的序号
+	bool operator &lt; (const Heap&amp; rhs)const
+	{
+		return d&gt;rhs.d;
+	} //重载运算符
+}; //我们之前花了大量的笔墨来讲解的堆优化结构体
+
+void AddEdge(int x,int y,int v) //前向星连边操作
+{
+	a[++cnt].next=head[x];
+	a[cnt].to=y;
+	a[cnt].w=v;
+	head[x]=cnt;
+}
+
+bool vis[maxn]; //记录是否被访问
+int d[maxn]; //d[i]记录节点i离源点的距离
+
+int Dij(int x)
+{
+	priority_queue &lt;Heap&gt; Q; //定义一个储存节点的堆Q
+	memset(vis,0,sizeof(vis));
+	for(int i=1;i&lt;=n;i++)
+		d[i]=inf; //Dijkstra日常操作
+	d[x]=0;
+	Q.push((Heap){ d[x],x }); //将当前节点的序号和值push到堆里面
+	while(!Q.empty()) //Dijkstra日常操作，就是查找部分变成了堆的查找
+	{
+		Heap u=Q.top();
+		Q.pop();
+		int s=u.num;
+		if(vis[s]) continue;
+		vis[s]=1;
+		for(int i=head[s];i;i=a[i].next)
+		{
+			int y=a[i].to;
+			if(!vis[y] &amp;&amp; d[s]+a[i].w&lt;d[y])
+			{
+				d[y]=d[s]+a[i].w;
+				Q.push((Heap){ d[y],y });
+			}
+		}
+	}
+	int ans=0;
+	for(int i=1;i&lt;=e;i++)
+		ans+=d[cow[i]];
+	return ans;
+}
+	
+int main()
+{
+	e=Read();
+	n=Read();
+	m=Read();
+	for(int i=1;i&lt;=e;i++)
+		cow[i]=Read(); 
+	for(int i=1;i&lt;=m;i++)
+	{
+		int x,y,v;
+		x=Read();
+		y=Read();
+		v=Read();
+		AddEdge(x,y,v);
+		AddEdge(y,x,v); //建边操作
+	}
+	for(int i=1;i&lt;=n;i++)
+		k=min(k,Dij(i));
+	printf(&quot;%d\n&quot;,k);
+	return 0;
+}
+</code></pre>
 ]]></content>
     </entry>
     <entry>
@@ -995,128 +1258,6 @@ int main()
 <p>撒花~✿✿ヽ(°▽°)ノ✿</p>
 <hr>
 <h6 id="喜欢就点个赞嘛qaq">喜欢就点个赞嘛QAQ</h6>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[BSOJ1533 战略游戏1111]]></title>
-        <id>https://MrContinue.github.io/post/bsoj1533-zhan-lue-you-xi-1111/</id>
-        <link href="https://MrContinue.github.io/post/bsoj1533-zhan-lue-you-xi-1111/">
-        </link>
-        <updated>2020-04-11T10:15:05.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="description">Description</h2>
-<pre><code>Bob喜欢玩电脑游戏，特别是战略游戏。但是他经常无法找到快速玩过游戏的办法。现在他有个问题。
-他要建立一个古城堡，城堡中的路形成一棵树。
-他要在这棵树的结点上放置最少数目的士兵，使得这些士兵能了望到所有的路。注意，某个士兵在一个结点上时，与该结点相连的所有边将都可以被了望到。
-请你编一程序，给定一树，帮Bob计算出他需要放置最少的士兵。
-</code></pre>
-<h2 id="input">Input</h2>
-<pre><code>输入文件中数据表示一棵树，描述如下：
-第一行 N，表示树中结点的数目。
-第二行至第N+1行，每行描述每个结点信息，依次为：该结点标号i，k(后面有k条边与结点I相连)，接下来k个数，分别是每条边的另一个结点标号r1，r2，...，rk。
-对于一个n(0 &lt; n &lt;= 1500)个结点的树，结点标号在0到n-1之间，在输入文件中每条边只出现一次。
-</code></pre>
-<h2 id="output">Output</h2>
-<pre><code>输出文件仅包含一个数，为所求的最少的士兵数目。
-</code></pre>
-<h2 id="sample-input">Sample Input</h2>
-<pre><code>4
-0 1 1
-1 2 2 3
-2 0
-3 0
-</code></pre>
-<h2 id="sample-output">Sample Output</h2>
-<pre><code>1
-</code></pre>
-<hr>
-<p>**树形DP！**直切思路！</p>
-<hr>
-<h2 id="一状态和表示">一：状态和表示</h2>
-<p>设f[i][1]表示i点放士兵时，以i为根的子树需要的 最少士兵数目。</p>
-<p>f[i][0]表示i点不放士兵时，以i为根的子树需要的最少士兵数目。</p>
-<h2 id="二状态转移">二：状态转移</h2>
-<p>当点i不放时，则它的所有儿子都必须放，即f[i][0]+=f[j][1]。其中j为i的儿子。</p>
-<p>当点i放时，则它的所有儿子放与不放无所谓，但应该取两种情况的最小值。即 f[i][1]+=min(f[j][1],f[j][0])。</p>
-<p>其中j为i的儿子。 初始条件：<strong>f[i][0]=0;f[i][1]=1。</strong></p>
-<h2 id="代码细节完善">代码&amp;&amp;细节完善</h2>
-<p>注意的点如下：</p>
-<ul>
-<li>
-<p>平常就要注意的是结构体数组一定要<strong>开两倍！！</strong></p>
-</li>
-<li>
-<p>平常也要注意像本题这种无向的话<strong>连边连2次</strong></p>
-</li>
-<li>
-<p>这里Dfs是从（0，-1）开始的</p>
-</li>
-<li>
-<p>是取的min值，注意读题</p>
-</li>
-</ul>
-<p>上代码！</p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-
-#define maxn 1505
-using namespace std;
-
-struct node
-{
-	int to,next;
-}a[maxn&lt;&lt;1];
-
-int f[maxn][2];
-int head[maxn];
-int cnt;
-int num[maxn];
-
-void AddEdge(int x,int y)
-{
-	a[++cnt].next=head[x];
-	a[cnt].to=y;
-	head[x]=cnt;
-}
-
-void Dfs(int x,int prt)
-{
-	f[x][1]=1;
-	for(int i=head[x];i;i=a[i].next)
-	{
-		int y=a[i].to;
-		if(y==prt) continue;
-		Dfs(y,x);
-		f[x][0]+=f[y][1];
-		f[x][1]+=min(f[y][0],f[y][1]);
-	}
-}
-
-int main()
-{
-	int n;
-	cin&gt;&gt;n;
-    for(int i=1;i&lt;=n;i++)
-	{
-		int x;
-        cin&gt;&gt;x;
-        cin&gt;&gt;num[x];
-        for(int j=1;j&lt;=num[x];j++)
-		{
-			int y;
-            cin&gt;&gt;y;
-            AddEdge(x,y);
-            AddEdge(y,x);
-        }
-    }
-    Dfs(0,-1);
-    int ans=min(f[0][0],f[0][1]);
-    cout&lt;&lt;ans&lt;&lt;endl;
-	return 0;
-}
-
-</code></pre>
-<hr>
-<h6 id="写题解不易-求点赞qaq">写题解不易 求点赞QAQ</h6>
 ]]></content>
     </entry>
 </feed>
