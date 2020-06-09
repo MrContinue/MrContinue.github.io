@@ -8,7 +8,7 @@
 <meta name="description" content="我从心底里爱着…你内心深处沉睡着的希望">
 <meta name="theme-color" content="#000">
 <title>【整理】手写快读模板及简单分析 | Continue的博客</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1588491625635">
+<link rel="shortcut icon" href="/favicon.ico?v=1591713579769">
 <link rel="stylesheet" href="/styles/main.css">
 <link rel="stylesheet" href="/media/css/gemini.css">
 
@@ -169,7 +169,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">17</span>
+        <span class="site-item-stat-count">18</span>
         <span class="site-item-stat-name">文章</span>
       </a>
     </div>
@@ -524,7 +524,7 @@ window.addEventListener('load', function() {
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>667<span class="pc-show">字数</span></span>
+      <span>693<span class="pc-show">字数</span></span>
     </span>
     
       
@@ -559,23 +559,22 @@ window.addEventListener('load', function() {
 <hr>
 <h2 id="快读代码模板">快读代码模板</h2>
 <p>纯代码版：</p>
-<pre><code> inline int Read()
+<pre><code>inline int Read()
 {
-	int s=0;
-	int f=1;
-	char ch=getchar();
-	while(ch&lt;'0'||ch&gt;'9')
-	{
-		if(ch=='-')
-			f=-1;
-		ch=getchar();
-	}
-	while(ch&gt;='0'&amp;&amp;ch&lt;='9')
-	{
-		s=(s&lt;&lt;1)+(s&lt;&lt;3)+ch-'0';
-		ch=getchar();
-	}
-	return s*f;
+    int s=0,f=1;
+    char ch=getchar();
+    while(!isdigit(ch))
+    {
+        if(ch=='-')
+            f=-1;
+        ch=getchar();
+    }
+    while(isdigit(ch))
+    {
+        s=(s&lt;&lt;1)+(s&lt;&lt;3)+ch-'0';
+        ch=getchar();
+    }
+    return s*f;
 }
 </code></pre>
 <p>注释解析版：</p>
@@ -584,18 +583,18 @@ window.addEventListener('load', function() {
 	int s=0; //存数值
 	int f=1; //存符号
 	char ch=getchar(); //当前读取的字符
-	while(ch&lt;'0'||ch&gt;'9') //如果当前读入的字符不是数字
-	{
-		if(ch=='-') //如果是负号
-			f=-1; //则标记这个数为负
-		ch=getchar(); //并且继续读取下一个字符
-	}
-	while(ch&gt;='0'&amp;&amp;ch&lt;='9') //如果当前读入的字符是数字
-	{
-		s=(s&lt;&lt;1)+(s&lt;&lt;3)+ch-'0'; //则将值累加到存数值的变量s里面
-		ch=getchar(); //并且继续读取下一个字符
-	}
-	return s*f; //如果t在判断负数时被标记成了-1，那么这个时候数值s与t相乘，直接变为负值
+    while(!isdigit(ch)) //如果当前读入的字符不是数字
+    {
+        if(ch=='-') //如果是负号
+            f=-1; //则标记这个数为负
+        ch=getchar(); //并且继续读取下一个字符
+    }
+    while(isdigit(ch)) //如果当前读入的字符是数字
+    {
+        s=(s&lt;&lt;1)+(s&lt;&lt;3)+ch-'0'; //则将值累加到存数值的变量s里面
+        ch=getchar(); //并且继续读取下一个字符
+    }
+    return s*f; //如果t在判断负数时被标记成了-1，那么这个时候数值s与t相乘，直接变为负值
 }
 </code></pre>
 <hr>
@@ -604,6 +603,10 @@ window.addEventListener('load', function() {
 <li>
 <p>Q：在累加值的时候<code>s=(s&lt;&lt;1)+(s&lt;&lt;3)+ch-'0'</code>中的<code>(s&lt;&lt;1)+(s&lt;&lt;3)</code>是什么意思呢？<br>
 A：<code>(s&lt;&lt;1)+(s&lt;&lt;3)</code>就是和<code>s*10</code>一个效果啦，只是在这里运用了快一点的位运算。当然，直接写<code>s*10</code>也不会有什么问题啦qwq</p>
+</li>
+<li>
+<p>Q：啥是isdigit啊？<br>
+A：就是一个判断<strong>输入字符串是否为整数</strong>的函数啦，用法就是isdigit(ch)，头文件的话，有iostream就可以编译成功哦qwq</p>
 </li>
 <li>
 <p>Q：为什么不介绍快速输出呢？<br>
@@ -685,7 +688,7 @@ A：因为快速输出没有什么特别的需要啊，平常用printf它不香�
       Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | © 2019-2020 Theme By <a href="https://github.com/hsxyhao/gridea-theme-next" target="_blank">HsxyHao</a>
     </div>
     <div class="poweredby">
-      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+      我从心底里爱着…你内心深处沉睡着的希望
     </div>
   </footer>
   
