@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MrContinue.github.io</id>
     <title>Continue的博客</title>
-    <updated>2020-06-10T13:49:04.719Z</updated>
+    <updated>2020-06-10T14:21:26.271Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MrContinue.github.io"/>
     <link rel="self" href="https://MrContinue.github.io/atom.xml"/>
@@ -869,7 +869,12 @@ int main()
 <h4 id="割点">割点</h4>
 <h5 id="割点是什么">割点是什么？</h5>
 <p>割点是一张无向图中<strong>非常重要</strong>的点。（额……不是废话）在一张连通的无向图中，如果突然少了一个割点，那么这个图就会变得不连通。</p>
-<p>以下面这张（我们很熟悉的）图为例：</p>
+<p>以下面这张（我们很熟悉的）图为例：<br>
+<img src="https://MrContinue.github.io/post-images/1591797139368.png" alt="" loading="lazy"></p>
+<p>其中节点<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>6</mn></mrow><annotation encoding="application/x-tex">6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">6</span></span></span></span>就是割点之一。因为如果没有了节点<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>6</mn></mrow><annotation encoding="application/x-tex">6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">6</span></span></span></span>，这张图就会变成这样：<br>
+<img src="https://MrContinue.github.io/post-images/1591797820993.png" alt="" loading="lazy"><br>
+这样就易懂很多啦qwq</p>
+<p>但是这时候聪明的大佬宁可能要问了，说割点就是“很重要的点”是非常不严谨的不良行为（主要是不利于装B（bushi））</p>
 <ul>
 <li>
 <p><strong>割点</strong>：</p>
